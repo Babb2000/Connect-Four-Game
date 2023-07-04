@@ -1,6 +1,6 @@
 # Connect-Four-Game / Inspired by [Alex Younger](https://github.com/fortypercenttitanium)
 
-[Image of Blog Post](Images/Connect_FourGame.png)
+![Image of Blog Post](Images/Connect_FourGame.png)
 
 <br>
 
