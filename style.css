@@ -1,3 +1,10 @@
+body{
+  background: rgb(15,100,202);
+  background: linear-gradient(90deg, rgba(15,100,202,1) 4%, rgba(15,100,202,1) 12%, rgba(0,191,255,1) 55%, rgba(0,212,255,1) 78%);
+  font-family: 'Chakra Petch', sans-serif;
+
+}
+
 .board {
   display: grid;
   height: 500px;
@@ -7,7 +14,7 @@
   border: 1px solid black;
   gap: 2px;
   padding: 2px;
-  background-color: rgb(243, 243, 220);
+  background-color: blue;
 }
 
 .cell {
@@ -17,7 +24,7 @@
   text-align: center;
   font-size: 2rem;
   border: 1px solid grey;
-  background: lightyellow;
+  background: blue;
   cursor: pointer;
 }
 
@@ -35,4 +42,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 15px;
+  font-size: 35px;
 }
