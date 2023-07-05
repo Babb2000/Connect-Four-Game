@@ -26,6 +26,7 @@ body{
   border: 1px solid grey;
   background: blue;
   cursor: pointer;
+  color: white;
 }
 
 .flex-container{
@@ -44,4 +45,5 @@ body{
   align-items: center;
   padding-top: 15px;
   font-size: 35px;
+  color: white;
 }

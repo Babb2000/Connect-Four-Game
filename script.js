@@ -4,20 +4,30 @@ function Gameboard() {
   const board = [];
 
   for (let i = 0; i < rows; i++) {
-    board[i] = [];
+      board[i] = [];
     for (let j = 0; j < columns; j++) {
-      board[i].push(Cell());
+     board[i].push(Cell());
+      
     }
   }
 
   const getBoard = () => board;
 
+
   const dropToken = (column, player) => {
+    
+    /*board.filter takes a call back function loops through every row of the array and sees if the row[column]'s value is set to zero, if it is then the .map method
+    is called for the empty cell and it also takes a call back function which gets every single cell that passed this test condition and returns the element to the
+    available cells array*/
     const availableCells = board.filter((row) => row[column].getValue() === 0).map(row => row[column]);
+    
+  
+
 
     if (!availableCells.length) return;
+ 
 
-    const lowestRow = availableCells.length - 1;
+    const lowestRow = availableCells.length - 1; 
     board[lowestRow][column].addToken(player);
   };
 
@@ -44,11 +54,10 @@ function Cell() {
   };
 }
 
-function GameController(
-  playerOneName = "Player One",
-  playerTwoName = "Player Two"
-) {
+function GameController(playerOneName = "Player One", playerTwoName = "Player 2"){
+
   const board = Gameboard();
+
 
   const players = [
     {
@@ -70,7 +79,7 @@ function GameController(
 
   const printNewRound = () => {
     board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.`);
+    console.log(`${getActivePlayer().name}'s Turn.`);
   };
 
   const playRound = (column) => {
