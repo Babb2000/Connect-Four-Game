@@ -2,17 +2,22 @@ function Intro(){
  
  function clearScreen(){
   let div = document.querySelector('.container');
+  console.log("hi");
   div.style.display = "none";
  }
 
   function UserNameInterface(){
     const screen = DOMManip();
     let mainDiv = screen.createFlexContainer("div", "500", "500");
-    mainDiv.screen.
+    mainDiv = screen.addBoarder(mainDiv, "2px solid white");
+    console.log(mainDiv);
+    let text = screen.createForm();
+    let rootElement = appendElements(mainDiv, text);
+    let main = document.body;
+    main.appendChild(rootElement);
 
-    const h1 = screen.createFlexContainer("h1","250", "250");
-    
-    
+
+   
   }
 
 
@@ -22,17 +27,18 @@ function Intro(){
 
 }
 
-Intro();
-
+let intro = Intro();
+intro.clearScreen();
+intro.UserNameInterface();
 
 
 function DOMManip(){
 
   function createFlexContainer(type, height, width){
     
-    let container = document.createElement(type);
-    container.style.height = `${height} px`;
-    container.sytle.width = `${width} px`;
+    const container = document.createElement(type);
+    container.style.height = `${height}px`;
+    container.style.width = `${width}px`;
     container.style.display = "flex";
     container.style.justifyContent = "center";
     container.alignItems = "center";
@@ -40,7 +46,9 @@ function DOMManip(){
   }
 
   function appendElements(element, elementAppended){
-    return element.appendChild(elementAppended);
+    
+    element.appendChild(elementAppended);
+    return element;
   }
 
   function createForm(){
@@ -51,16 +59,17 @@ function DOMManip(){
     appendElements(div2, h1);
     appendElements(div2, input);
     appendElements(div, div2);
+    return div;
   }
 
-  function addStyles(element, property, value){
-
-    let styledElement = element.syle.property = value;
-    return styledElement;
+  function addBoarder(element, value){
+    
+    element.style.border = value;
+    return element;
 
   }
 
-  return {createFlexContainer, appendElements, createForm, addStyles};
+  return {createFlexContainer, appendElements, createForm, addBoarder};
 
 }
 
