@@ -67,17 +67,23 @@ function DOMManip(){
   }
 
   function createForm(){
-    let div = createFlexContainer("div", "350", "350");
+    let div = createFlexContainer("div", "400", "800");
+    div.style.borderRadius = "50%";
     div.style.flexDirection = "column";
     div.style.alignItems = "center";
     div.style.justifyContent = "center";
     div.style.gap = "10px";
     div.style.fontSize = "17px";
+    let h1 = document.createElement('h1');
+    h1.style.fontSize = "35px";
+    h1.style.textShadow = "3.5px 1.75px 1.75px black"
     let text = document.createTextNode("Player One, Please Enter in Your Name: ");
     let input = document.createElement('input');
+    input.style.width = "293.17px"
+    h1.appendChild(text);
     input.setAttribute("id", "player1");
     input.placeholder = "Player One, Name: "
-    appendElements(div, text);
+    appendElements(div, h1);
     appendElements(div, input);
     return div;
   }

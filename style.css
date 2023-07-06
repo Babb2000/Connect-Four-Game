@@ -1,8 +1,7 @@
 body{
   background: rgb(15,100,202);
   background: linear-gradient(90deg, rgba(15,100,202,1) 4%, rgba(15,100,202,1) 12%, rgba(0,191,255,1) 55%, rgba(0,212,255,1) 78%);
-  font-family: 'Chakra Petch', sans-serif;
-
+  font-family: 'Ysabeau SC', sans-serif;
 }
 
 .board {
