@@ -6,7 +6,6 @@ function Intro(){
   let div = document.querySelector('.container');
   let div2 = document.querySelector('.flex-header');
   let div3 = document.querySelector('.flex-container');
-  console.log("hi");
   div.style.display = "none";
   div2.style.display = "none";
   div3.style.display = "none";
@@ -65,7 +64,19 @@ function Intro(){
    
   }
 
- return {clearScreen, UserNameInterface, animateBorder};
+  function getInputData(){
+    let form = document.querySelector("form");
+    form.addEventListener("submit", (e)=> {
+      e.preventDefault();
+      const data = new FormData(form);
+      const obj = Object.fromEntries(data);
+      
+      GameController(obj["userName"], obj["userName"]);
+    
+    })
+  }
+
+ return {clearScreen, UserNameInterface, animateBorder, getInputData};
 
 }
 
@@ -75,6 +86,8 @@ intro.UserNameInterface();
 let accessMethod = DOMManip();
 setInterval(accessMethod.blinkingText, 1000);
 setInterval(intro.animateBorder, 1000);
+intro.getInputData();
+
 
 
 function DOMManip(){
@@ -92,8 +105,6 @@ function DOMManip(){
   }
 
   function appendElements(element, elementAppended){
-    console.log(element);
-    console.log(elementAppended);
     element.appendChild(elementAppended);
     return element;
   }
@@ -109,14 +120,23 @@ function DOMManip(){
     let h1 = document.createElement('h1');
     h1.style.fontSize = "35px";
     h1.style.textShadow = "3.5px 1.75px 1.75px black"
+    let form = document.createElement('form');
+    form.method = "POST";
+    let button = document.createElement('button');
     let text = document.createTextNode("Player One, Please Enter in Your Name: ");
     let input = document.createElement('input');
     input.style.width = "293.17px"
+    input.name = "userName";
+    button.type = "submit";
+    button.style.width = "70px";
+    button.innerText = "Submit";
     h1.appendChild(text);
+    form.appendChild(input);
+    form.appendChild(button);
     input.setAttribute("id", "player1");
     input.placeholder = "Player One, Name: "
     appendElements(div, h1);
-    appendElements(div, input);
+    appendElements(div, form);
     return div;
   }
 
@@ -148,165 +168,167 @@ function DOMManip(){
     return element;
   }
 
+   
+
   return {createFlexContainer, appendElements, createForm, addBoarder, styleBorder, blinkingText};
 
 }
 
 
 
-// function Gameboard() {
-//   const rows = 6;
-//   const columns = 7;
-//   const board = [];
+function Gameboard() {
+  const rows = 6;
+  const columns = 7;
+  const board = [];
 
-//   for (let i = 0; i < rows; i++) {
-//       board[i] = [];
-//     for (let j = 0; j < columns; j++) {
-//      board[i].push(Cell());
+  for (let i = 0; i < rows; i++) {
+      board[i] = [];
+    for (let j = 0; j < columns; j++) {
+     board[i].push(Cell());
       
-//     }
-//   }
+    }
+  }
 
-//   const getBoard = () => board;
+  const getBoard = () => board;
 
 
-//   const dropToken = (column, player) => {
+  const dropToken = (column, player) => {
     
-//     /*board.filter takes a call back function loops through every row of the array and sees if the row[column]'s value is set to zero, if it is then the .map method
-//     is called for the empty cell and it also takes a call back function which gets every single cell that passed this test condition and returns the element to the
-//     available cells array*/
-//     const availableCells = board.filter((row) => row[column].getValue() === 0).map(row => row[column]);
+    /*board.filter takes a call back function loops through every row of the array and sees if the row[column]'s value is set to zero, if it is then the .map method
+    is called for the empty cell and it also takes a call back function which gets every single cell that passed this test condition and returns the element to the
+    available cells array*/
+    const availableCells = board.filter((row) => row[column].getValue() === 0).map(row => row[column]);
     
   
 
 
-//     if (!availableCells.length) return;
+    if (!availableCells.length) return;
  
 
-//     const lowestRow = availableCells.length - 1; 
-//     board[lowestRow][column].addToken(player);
-//   };
+    const lowestRow = availableCells.length - 1; 
+    board[lowestRow][column].addToken(player);
+  };
 
-//   const printBoard = () => {
-//     const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
-//     console.log(boardWithCellValues);
-//   };
+  const printBoard = () => {
+    const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
+    console.log(boardWithCellValues);
+  };
 
-//   return { getBoard, dropToken, printBoard };
-// }
+  return { getBoard, dropToken, printBoard };
+}
 
-// function Cell() {
-//   let value = 0;
+function Cell() {
+  let value = 0;
 
-//   const addToken = (player) => {
-//     value = player;
-//   };
+  const addToken = (player) => {
+    value = player;
+  };
 
-//   const getValue = () => value;
+  const getValue = () => value;
 
-//   return {
-//     addToken,
-//     getValue
-//   };
-// }
-
-
-// function GameController(playerOneName = "Player One", playerTwoName = "Player 2"){
-
-//   const board = Gameboard();
+  return {
+    addToken,
+    getValue
+  };
+}
 
 
-//   const players = [
-//     {
-//       name: playerOneName,
-//       token: 1
-//     },
-//     {
-//       name: playerTwoName,
-//       token: 2
-//     }
-//   ];
+function GameController(playerOneName, playerTwoName){
 
-//   let activePlayer = players[0];
+  const board = Gameboard();
 
-//   const switchPlayerTurn = () => {
-//     activePlayer = activePlayer === players[0] ? players[1] : players[0];
-//   };
-//   const getActivePlayer = () => activePlayer;
 
-//   const printNewRound = () => {
-//     board.printBoard();
-//     console.log(`${getActivePlayer().name}'s Turn.`);
-//   };
+  const players = [
+    {
+      name: playerOneName,
+      token: 1
+    },
+    {
+      name: playerTwoName,
+      token: 2
+    }
+  ];
 
-//   const playRound = (column) => {
-//     console.log(
-//       `Dropping ${getActivePlayer().name}'s token into column ${column}...`
-//     );
-//     board.dropToken(column, getActivePlayer().token);
+  let activePlayer = players[0];
 
-//     /*  This is where we would check for a winner and handle that logic,
-//         such as a win message. */
+  const switchPlayerTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
+  const getActivePlayer = () => activePlayer;
 
-//     switchPlayerTurn();
-//     printNewRound();
-//   };
+  const printNewRound = () => {
+    board.printBoard();
+    console.log(`${getActivePlayer().name}'s Turn.`);
+  };
 
-//   printNewRound();
+  const playRound = (column) => {
+    console.log(
+      `Dropping ${getActivePlayer().name}'s token into column ${column}...`
+    );
+    board.dropToken(column, getActivePlayer().token);
 
-//   return {
-//     playRound,
-//     getActivePlayer,
-//     getBoard: board.getBoard
-//   };
-// }
+    /*  This is where we would check for a winner and handle that logic,
+        such as a win message. */
 
-// function ScreenController() {
-//   const game = GameController();
-//   const playerTurnDiv = document.querySelector('.turn');
-//   const boardDiv = document.querySelector('.board');
+    switchPlayerTurn();
+    printNewRound();
+  };
 
-//   const updateScreen = () => {
-//     // clear the board
-//     boardDiv.textContent = "";
+  printNewRound();
 
-//     // get the newest version of the board and player turn
-//     const board = game.getBoard();
-//     const activePlayer = game.getActivePlayer();
+  return {
+    playRound,
+    getActivePlayer,
+    getBoard: board.getBoard
+  };
+}
 
-//     // Display player's turn
-//     playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
+function ScreenController() {
+  const game = GameController();
+  const playerTurnDiv = document.querySelector('.turn');
+  const boardDiv = document.querySelector('.board');
 
-//     // Render board squares
-//     board.forEach(row => {
-//       row.forEach((cell, index) => {
-//         // Anything clickable should be a button!!
-//         const cellButton = document.createElement("button");
-//         cellButton.classList.add("cell");
-//         // Create a data attribute to identify the column
-//         // This makes it easier to pass into our `playRound` function 
-//         cellButton.dataset.column = index
-//         cellButton.textContent = cell.getValue();
-//         boardDiv.appendChild(cellButton);
-//       })
-//     })
-//   }
+  const updateScreen = () => {
+    // clear the board
+    boardDiv.textContent = "";
 
-//   // Add event listener for the board
-//   function clickHandlerBoard(e) {
-//     const selectedColumn = e.target.dataset.column;
-//     // Make sure I've clicked a column and not the gaps in between
-//     if (!selectedColumn) return;
+    // get the newest version of the board and player turn
+    const board = game.getBoard();
+    const activePlayer = game.getActivePlayer();
+
+    // Display player's turn
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
+
+    // Render board squares
+    board.forEach(row => {
+      row.forEach((cell, index) => {
+        // Anything clickable should be a button!!
+        const cellButton = document.createElement("button");
+        cellButton.classList.add("cell");
+        // Create a data attribute to identify the column
+        // This makes it easier to pass into our `playRound` function 
+        cellButton.dataset.column = index
+        cellButton.textContent = cell.getValue();
+        boardDiv.appendChild(cellButton);
+      })
+    })
+  }
+
+  // Add event listener for the board
+  function clickHandlerBoard(e) {
+    const selectedColumn = e.target.dataset.column;
+    // Make sure I've clicked a column and not the gaps in between
+    if (!selectedColumn) return;
     
-//     game.playRound(selectedColumn);
-//     updateScreen();
-//   }
-//   boardDiv.addEventListener("click", clickHandlerBoard);
+    game.playRound(selectedColumn);
+    updateScreen();
+  }
+  boardDiv.addEventListener("click", clickHandlerBoard);
 
-//   // Initial render
-//   updateScreen();
+  // Initial render
+  updateScreen();
 
-//   // We don't need to return anything from this module because everything is encapsulated inside this screen controller.
-// }
+  // We don't need to return anything from this module because everything is encapsulated inside this screen controller.
+}
 
-// ScreenController();
+ScreenController();
