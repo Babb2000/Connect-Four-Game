@@ -12,7 +12,7 @@ function Intro(){
     mainDiv = screen.addBoarder(mainDiv, "2px solid white");
     console.log(mainDiv);
     let text = screen.createForm();
-    let rootElement = appendElements(mainDiv, text);
+    let rootElement = screen.appendElements(mainDiv, text);
     let main = document.body;
     main.appendChild(rootElement);
 
@@ -46,7 +46,8 @@ function DOMManip(){
   }
 
   function appendElements(element, elementAppended){
-    
+    console.log(element);
+    console.log(elementAppended);
     element.appendChild(elementAppended);
     return element;
   }
@@ -54,16 +55,16 @@ function DOMManip(){
   function createForm(){
     let div = createFlexContainer("div", "350", "350");
     let div2 = createFlexContainer("div", "150", "150");
-    let h1 = document.createElement('h1').textContent = "Player One, Please enter in Your Name: ";
+    let text = document.createTextNode("Player One, Please Enter in Your Name: ");
     let input = document.createElement('input');
-    appendElements(div2, h1);
+    appendElements(div2, text);
     appendElements(div2, input);
     appendElements(div, div2);
     return div;
   }
 
   function addBoarder(element, value){
-    
+
     element.style.border = value;
     return element;
 
