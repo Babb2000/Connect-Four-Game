@@ -15,7 +15,7 @@ function Intro(){
   function UserNameInterface(){
     const screen = DOMManip();
     let mainDiv = screen.createFlexContainer("div", "500", "500");
-    mainDiv = screen.addBoarder(mainDiv, "4px solid white");
+    mainDiv = screen.addBoarder(mainDiv, "4px solid");
     mainDiv = screen.styleBorder(mainDiv);
     mainDiv.style.width = "800px";
     mainDiv.style.height = "400px";
@@ -53,16 +53,16 @@ function Intro(){
   }
   
 
-  function bottomBorder(element, callback) {
+  function bottomBorder(element) {
     element.style.borderBottomColor = "rgba(0, 212, 255, 1)";
     setTimeout(function() {
-      rightBorder(element, callback);
+      rightBorder(element);
     }, 100);
   }
 
-  function rightBorder(element, callback) {
+  function rightBorder(element) {
     element.style.borderRightColor = "rgba(0, 212, 255, 1)";
-    //callback(); // Invoke the callback function
+   
   }
 
  return {clearScreen, UserNameInterface, animateBorder};
