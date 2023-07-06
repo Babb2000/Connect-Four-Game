@@ -28,7 +28,6 @@ function Intro(){
     main.style.alignContent = "center";
     main.appendChild(rootElement);
 
-
    
   }
 
@@ -42,6 +41,8 @@ function Intro(){
 let intro = Intro();
 intro.clearScreen();
 intro.UserNameInterface();
+let accessMethod = DOMManip();
+setInterval(accessMethod.blinkingText, 1000);
 
 
 function DOMManip(){
@@ -74,15 +75,26 @@ function DOMManip(){
     div.style.fontSize = "17px";
     let text = document.createTextNode("Player One, Please Enter in Your Name: ");
     let input = document.createElement('input');
+    input.setAttribute("id", "player1");
     input.placeholder = "Player One, Name: "
     appendElements(div, text);
     appendElements(div, input);
     return div;
   }
 
-  /*function blinkingText(){
-
-  }*/
+  function blinkingText(){
+    num++;
+    console.log(num);
+    if(num % 2 === 0)
+    {
+      let input = document.getElementById("player1");
+      input.placeholder = " ";
+    }
+    else{
+      let input = document.getElementById("player1");
+      input.placeholder = "Player One, Name: ";
+    }
+  }
 
   function addBoarder(element, value){
 
@@ -99,7 +111,7 @@ function DOMManip(){
     return element;
   }
 
-  return {createFlexContainer, appendElements, createForm, addBoarder, styleBorder};
+  return {createFlexContainer, appendElements, createForm, addBoarder, styleBorder, blinkingText};
 
 }
 
