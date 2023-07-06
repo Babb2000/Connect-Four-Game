@@ -71,6 +71,7 @@ function DOMManip(){
     div.style.alignItems = "center";
     div.style.justifyContent = "center";
     div.style.gap = "10px";
+    div.style.fontSize = "17px";
     let text = document.createTextNode("Player One, Please Enter in Your Name: ");
     let input = document.createElement('input');
     input.placeholder = "Player One, Name: "
