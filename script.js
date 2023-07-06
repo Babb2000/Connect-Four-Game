@@ -1,19 +1,31 @@
+let num = 0;
+
 function Intro(){
  
  function clearScreen(){
   let div = document.querySelector('.container');
+  let div2 = document.querySelector('.flex-header');
+  let div3 = document.querySelector('.flex-container');
   console.log("hi");
   div.style.display = "none";
+  div2.style.display = "none";
+  div3.style.display = "none";
  }
 
   function UserNameInterface(){
     const screen = DOMManip();
     let mainDiv = screen.createFlexContainer("div", "500", "500");
-    mainDiv = screen.addBoarder(mainDiv, "2px solid white");
-    console.log(mainDiv);
+    mainDiv = screen.addBoarder(mainDiv, "4px solid white");
+    mainDiv = screen.styleBorder(mainDiv);
+    mainDiv.style.width = "800px";
+    mainDiv.style.height = "400px";
+    mainDiv.style.borderRadius = "50%";
     let text = screen.createForm();
     let rootElement = screen.appendElements(mainDiv, text);
     let main = document.body;
+    main.style.display = "flex";
+    main.style.justifyContent = "center";
+    main.style.alignContent = "center";
     main.appendChild(rootElement);
 
 
@@ -42,6 +54,7 @@ function DOMManip(){
     container.style.display = "flex";
     container.style.justifyContent = "center";
     container.alignItems = "center";
+  
     return container;
   }
 
@@ -54,14 +67,21 @@ function DOMManip(){
 
   function createForm(){
     let div = createFlexContainer("div", "350", "350");
-    let div2 = createFlexContainer("div", "150", "150");
+    div.style.flexDirection = "column";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "center";
+    div.style.gap = "10px";
     let text = document.createTextNode("Player One, Please Enter in Your Name: ");
     let input = document.createElement('input');
-    appendElements(div2, text);
-    appendElements(div2, input);
-    appendElements(div, div2);
+    input.placeholder = "Player One, Name: "
+    appendElements(div, text);
+    appendElements(div, input);
     return div;
   }
+
+  /*function blinkingText(){
+
+  }*/
 
   function addBoarder(element, value){
 
@@ -70,7 +90,15 @@ function DOMManip(){
 
   }
 
-  return {createFlexContainer, appendElements, createForm, addBoarder};
+  function styleBorder(element){
+    element.style.borderTopColor = "rgba(15,100,202,1)";
+    element.style.borderBottomColor = "rgba(0,212,255,1)";
+    element.style.borderLeftColor = "rgba(15,100,202,1)";
+    element.style.borderRightColor = "rgba(0,191,255,1)";
+    return element;
+  }
+
+  return {createFlexContainer, appendElements, createForm, addBoarder, styleBorder};
 
 }
 
