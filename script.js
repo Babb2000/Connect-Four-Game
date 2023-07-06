@@ -20,6 +20,7 @@ function Intro(){
     mainDiv.style.width = "800px";
     mainDiv.style.height = "400px";
     mainDiv.style.borderRadius = "50%";
+    mainDiv.setAttribute("id", "animateBorder");
     let text = screen.createForm();
     let rootElement = screen.appendElements(mainDiv, text);
     let main = document.body;
@@ -31,10 +32,40 @@ function Intro(){
    
   }
 
+  function animateBorder(){
+    let div = document.querySelector("#animateBorder");
+    topBorder(div);
+  }
 
+  function topBorder(element) {
+    element.style.border = "2px solid";
+    element.style.borderTopColor = "rgba(15, 100, 202, 1)";
+    setTimeout(function() {
+      leftBorder(element);
+    }, 100);
+  } 
 
+  function leftBorder(element) {
+    element.style.borderLeftColor = "rgba(0, 212, 255, 1)";
+    setTimeout(function() {
+      bottomBorder(element);
+    }, 100);
+  }
+  
 
- return {clearScreen, UserNameInterface};
+  function bottomBorder(element, callback) {
+    element.style.borderBottomColor = "rgba(0, 212, 255, 1)";
+    setTimeout(function() {
+      rightBorder(element, callback);
+    }, 100);
+  }
+
+  function rightBorder(element, callback) {
+    element.style.borderRightColor = "rgba(0, 212, 255, 1)";
+    //callback(); // Invoke the callback function
+  }
+
+ return {clearScreen, UserNameInterface, animateBorder};
 
 }
 
@@ -43,6 +74,7 @@ intro.clearScreen();
 intro.UserNameInterface();
 let accessMethod = DOMManip();
 setInterval(accessMethod.blinkingText, 1000);
+setInterval(intro.animateBorder, 1000);
 
 
 function DOMManip(){
@@ -90,7 +122,6 @@ function DOMManip(){
 
   function blinkingText(){
     num++;
-    console.log(num);
     if(num % 2 === 0)
     {
       let input = document.getElementById("player1");
