@@ -27,8 +27,6 @@ function playerOneData(){
       function UserNameInterface(){
         const screen = DOMManip();
         let mainDiv = screen.createFlexContainer("div", "500", "500");
-        mainDiv = screen.addBoarder(mainDiv, "4px solid");
-        mainDiv = screen.styleBorder(mainDiv);
         mainDiv.style.width = "800px";
         mainDiv.style.height = "400px";
         mainDiv.style.borderRadius = "50%";
@@ -172,17 +170,17 @@ function playerOneData(){
     
       }
     
-      function styleBorder(element){
-        element.style.borderTopColor = "rgba(15,100,202,1)";
-        element.style.borderBottomColor = "rgba(0,212,255,1)";
-        element.style.borderLeftColor = "rgba(15,100,202,1)";
-        element.style.borderRightColor = "rgba(0,191,255,1)";
-        return element;
-      }
+      // function styleBorder(element){
+      //   element.style.borderTopColor = "rgba(15,100,202,1)";
+      //   element.style.borderBottomColor = "rgba(0,212,255,1)";
+      //   element.style.borderLeftColor = "rgba(15,100,202,1)";
+      //   element.style.borderRightColor = "rgba(0,191,255,1)";
+      //   return element;
+      // }
     
       
     
-      return {createFlexContainer, appendElements, createForm, addBoarder, styleBorder, blinkingText};
+      return {createFlexContainer, appendElements, createForm, addBoarder, /*styleBorder,*/ blinkingText};
     
     }
 
@@ -272,7 +270,6 @@ function playerOneData(){
           const data = new FormData(form);
           const obj = Object.fromEntries(data);
           storeDataObj(obj["userName"]);
-        
         })
       }
     
@@ -377,6 +374,8 @@ function playerOneData(){
     setInterval(accessMethod.blinkingText, 1000);
     setInterval(intro.animateBorder, 1000);
     intro.getInputData();
+    //clearInterval(secondTimeBlink, secondTimeAnimate);
+
   
   }
 
@@ -390,7 +389,7 @@ function playerOneData(){
     div.style.display = "none";
   }*/
 
-return {playerOneData, playerTwoData, storeDataObj, /*clearmainDiv*/userName}
+return {playerOneData, playerTwoData, storeDataObj, /*clearmainDiv, */userName}
 }
 
 
