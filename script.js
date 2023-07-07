@@ -78,7 +78,7 @@ function playerOneData(){
       function getInputData(){
         let form = document.querySelector("form");
         form.addEventListener("submit", (e)=> {
-          e.preventDefault();
+          //e.preventDefault();
           const data = new FormData(form);
           const obj = Object.fromEntries(data);
           
@@ -227,6 +227,7 @@ function playerOneData(){
         main.style.alignContent = "center";
         main.appendChild(rootElement);
     
+        getInputData();
         
       }
     
@@ -270,10 +271,11 @@ function playerOneData(){
           const data = new FormData(form);
           const obj = Object.fromEntries(data);
           storeDataObj(obj["userName"]);
+          clearDom();
         })
       }
     
-      return {clearScreen, UserNameInterface, animateBorder, getInputData};
+      return {clearScreen, UserNameInterface, animateBorder};
     
     }
 
@@ -371,10 +373,9 @@ function playerOneData(){
     intro.clearScreen();
     intro.UserNameInterface();
     let accessMethod = DOMManip();
-    setInterval(accessMethod.blinkingText, 1000);
-    setInterval(intro.animateBorder, 1000);
-    intro.getInputData();
-    //clearInterval(secondTimeBlink, secondTimeAnimate);
+    let secondTimeBlink = setInterval(accessMethod.blinkingText, 1000);
+    let secondTimeAnimate = setInterval(intro.animateBorder, 1000);
+    cancelTimers(secondTimeBlink, secondTimeAnimate);
 
   
   }
@@ -389,6 +390,17 @@ function playerOneData(){
     div.style.display = "none";
   }*/
 
+
+  function cancelTimers(variable1, variable2){
+    clearInterval(variable1, variable2);
+  }
+
+  function clearDom(){
+    let div = document.querySelector("#movingBorder");
+    div.remove();
+    return;
+  }
+
 return {playerOneData, playerTwoData, storeDataObj, /*clearmainDiv, */userName}
 }
 
@@ -397,6 +409,9 @@ return {playerOneData, playerTwoData, storeDataObj, /*clearmainDiv, */userName}
 
 let user = IntroGameController();
 user.playerOneData();
+
+console.log(user.userName);
+
 
 
 
