@@ -196,12 +196,14 @@ function playerOneData(){
     function Intro(){
   
       function clearScreen(){
-      let div = document.querySelector('.container');
-      let div2 = document.querySelector('.flex-header');
-      let div3 = document.querySelector('.flex-container');
-      div.style.display = "none";
-      div2.style.display = "none";
-      div3.style.display = "none";
+        let div = document.querySelector("#animateBorder");
+        div.style.display = "none";
+      // let div = document.querySelector('.container');
+      // let div2 = document.querySelector('.flex-header');
+      // let div3 = document.querySelector('.flex-container');
+      // div.style.display = "none";
+      // div2.style.display = "none";
+      // div3.style.display = "none";
       }
     
       function UserNameInterface(){
@@ -212,7 +214,7 @@ function playerOneData(){
         mainDiv.style.width = "800px";
         mainDiv.style.height = "400px";
         mainDiv.style.borderRadius = "50%";
-        mainDiv.setAttribute("id", "animateBorder");
+        mainDiv.setAttribute("id", "movingBorder");
         let text = screen.createForm();
         let rootElement = screen.appendElements(mainDiv, text);
         let main = document.body;
@@ -225,7 +227,7 @@ function playerOneData(){
       }
     
       function animateBorder(){
-        let div = document.querySelector("#animateBorder");
+        let div = document.querySelector("#movingBorder");
         topBorder(div);
       }
     
