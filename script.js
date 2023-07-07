@@ -15,9 +15,13 @@ function playerOneData(){
       let div = document.querySelector('.container');
       let div2 = document.querySelector('.flex-header');
       let div3 = document.querySelector('.flex-container');
-      div.style.display = "none";
-      div2.style.display = "none";
-      div3.style.display = "none";
+      // div.style.display = "none";
+      // div2.style.display = "none";
+      // div3.style.display = "none";
+      div.remove();
+      div2.remove();
+      div3.remove();
+
       }
     
       function UserNameInterface(){
@@ -145,15 +149,17 @@ function playerOneData(){
     
       function blinkingText(){
         num++;
-        if(num % 2 === 0)
-        {
-          let input = document.getElementById("player1");
-          input.placeholder = " ";
-        }
-        else{
-          let input = document.getElementById("player1");
-          input.placeholder = "Player One, Name: ";
-        }
+         
+            if(num % 2 === 0)
+            {
+              let input = document.getElementById("player1");
+              input.placeholder = " ";
+            }
+            else{
+              let input = document.getElementById("player1");
+              input.placeholder = "Player One, Name: ";
+            }
+          
       }
     
       function addBoarder(element,/*identifier*/ value){
@@ -197,7 +203,7 @@ function playerOneData(){
   
       function clearScreen(){
         let div = document.querySelector("#animateBorder");
-        div.style.display = "none";
+        div.remove();
       // let div = document.querySelector('.container');
       // let div2 = document.querySelector('.flex-header');
       // let div3 = document.querySelector('.flex-container');
@@ -266,8 +272,7 @@ function playerOneData(){
           const data = new FormData(form);
           const obj = Object.fromEntries(data);
           storeDataObj(obj["userName"]);
-          //GameController(obj["userName"], obj["userName"]);
-
+        
         })
       }
     
@@ -328,15 +333,16 @@ function playerOneData(){
     
       function blinkingText(){
         num++;
-        if(num % 2 === 0)
-        {
-          let input = document.getElementById("player1");
-          input.placeholder = " ";
-        }
-        else{
-          let input = document.getElementById("player1");
-          input.placeholder = "Player One, Name: ";
-        }
+          if(num % 2 === 0)
+          {
+            let input = document.getElementById("player1");
+            input.placeholder = " ";
+          }
+          else{
+            let input = document.getElementById("player1");
+            input.placeholder = "Player One, Name: ";
+          }
+        
       }
     
       function addBoarder(element,/*identifier*/ value){
@@ -371,6 +377,7 @@ function playerOneData(){
     setInterval(accessMethod.blinkingText, 1000);
     setInterval(intro.animateBorder, 1000);
     intro.getInputData();
+  
   }
 
   function storeDataObj(element){
@@ -378,33 +385,19 @@ function playerOneData(){
     console.log(userName[0]);
   }
 
-  return {playerOneData, playerTwoData, storeDataObj}
+  /*function clearmainDiv(){
+    let div = querySelector("movingBorder")
+    div.style.display = "none";
+  }*/
+
+return {playerOneData, playerTwoData, storeDataObj, /*clearmainDiv*/userName}
 }
 
 
 
 
-let player1 = IntroGameController();
-player1.playerOneData();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let user = IntroGameController();
+user.playerOneData();
 
 
 
@@ -518,6 +511,17 @@ player1.playerOneData();
 // }
 
 // function ScreenController() {
+//   const clearScreen = ()=> {
+//        let div = document.querySelector('.container');
+//        let div2 = document.querySelector('.flex-header');
+//        let div3 = document.querySelector('.flex-container');
+//        div.style.display =  "block";
+//        div2.style.display = "block";
+//        div3.style.display = "block";
+//   }
+
+//   clearScreen();
+
 //   const game = GameController();
 //   const playerTurnDiv = document.querySelector('.turn');
 //   const boardDiv = document.querySelector('.board');
