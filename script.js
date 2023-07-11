@@ -2,15 +2,14 @@ let num = 0;
 
 
 
-
+function IntroController(){
 //Create object to store userName data
 let userName = [];
 
 //Start of new IntroGameController module and factory functions
-const getPlayer = (id1, id2, id3, id4, playerText, playerAttribute, inputPlaceholder)=> {
+const getPlayer = (id1, id2, id3, id4, id5, playerText, playerAttribute, inputPlaceholder)=> {
 
   const intro = ()=> {
-      console.log("In clear screen");
     let div = document.querySelector(id1); //container
     let div2 = document.querySelector(id2); //flex-header
     let div3 = document.querySelector(id3); //flex-container
@@ -39,7 +38,7 @@ const getPlayer = (id1, id2, id3, id4, playerText, playerAttribute, inputPlaceho
     
     const spinningBorder = ()=> {
 
-        let div = document.querySelector(id4);
+        let div = document.querySelector(id5);
         topBorder(div);
     
       function topBorder(element) {
@@ -85,6 +84,7 @@ const getPlayer = (id1, id2, id3, id4, playerText, playerAttribute, inputPlaceho
           storeDataObj(obj["userName"]);
   
         })
+        return;
     }
   
    const createFlexContainer = (type, height, width)=> {
@@ -147,14 +147,22 @@ const getPlayer = (id1, id2, id3, id4, playerText, playerAttribute, inputPlaceho
 
 }
 
-const player1 = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
+const player1 = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder","Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
 player1.intro();
 player1.userInterface();
-player1.spinningBorder();
+setInterval(player1.spinningBorder, 1000);
 player1.getInputData();
 
+const player2 = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder", "Player Two, Enter In Your Name: ", "player2", "Player 2 Name: ");
+player2.intro();
+player2.userInterface();
+setInterval(player2.spinningBorder, 1000);
+player2.getInputData();
 
 
+}
+
+IntroController();
 
 
 
