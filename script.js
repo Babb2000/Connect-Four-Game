@@ -2,16 +2,15 @@ let num = 0;
 
 
 
-function IntroGameController(){
+
 //Create object to store userName data
 let userName = [];
 
 //Start of new IntroGameController module and factory functions
-function Getplayer(id1, id2, id3, id4, playerText, playerAttribute, inputPlaceholder){
+const getPlayer = (id1, id2, id3, id4, playerText, playerAttribute, inputPlaceholder)=> {
 
-  const intro = (id1, id2, id3, id4)=> {
-
-    function clearScreen(){
+  const intro = ()=> {
+      console.log("In clear screen");
     let div = document.querySelector(id1); //container
     let div2 = document.querySelector(id2); //flex-header
     let div3 = document.querySelector(id3); //flex-container
@@ -21,80 +20,75 @@ function Getplayer(id1, id2, id3, id4, playerText, playerAttribute, inputPlaceho
     div.remove();
     div2.remove();
     div3.remove();
-    }
+  }
 
-    function UserNameInterface(){
-      const screen = domManip();
-      let mainDiv = screen.createFlexContainer("div", "500", "500");
+    const userInterface = ()=> {
+      let mainDiv = createFlexContainer("div", "500", "500");
       mainDiv.style.width = "800px";
       mainDiv.style.height = "400px";
       mainDiv.style.borderRadius = "50%";
       mainDiv.setAttribute("id", id4); //animateBorder
-      let text = screen.createForm();
-      let rootElement = screen.appendElements(mainDiv, text);
+      let text = createForm();
+      let rootElement = appendElements(mainDiv, text);
       let main = document.body;
       main.style.display = "flex";
       main.style.justifyContent = "center";
       main.style.alignContent = "center";
       main.appendChild(rootElement);
-  
-    }
-  
-    function animateBorder(){
-      let div = document.querySelector(id4);
-      topBorder(div);
-    }
-  
-    function topBorder(element) {
-      element.style.border = "2px solid";
-      element.style.borderTopColor = "rgba(15, 100, 202, 1)";
-      setTimeout(function() {
-        leftBorder(element);
-      }, 100);
-    } 
-  
-    function leftBorder(element) {
-      element.style.borderLeftColor = "rgba(0, 212, 255, 1)";
-      setTimeout(function() {
-        bottomBorder(element);
-      }, 100);
     }
     
-    function bottomBorder(element) {
-      element.style.borderBottomColor = "rgba(0, 212, 255, 1)";
-      setTimeout(function() {
-        rightBorder(element);
-      }, 100);
-    }
-  
-    function rightBorder(element) {
-      element.style.borderRightColor = "rgba(0, 212, 255, 1)";
-      
-    }
-  
-    function getInputData(){
-      let form = document.querySelector("form");
-      form.addEventListener("submit", (e)=> {
-        //e.preventDefault();
-        const data = new FormData(form);
-        const obj = Object.fromEntries(data);
+    const spinningBorder = ()=> {
+
+        let div = document.querySelector(id4);
+        topBorder(div);
+    
+      function topBorder(element) {
+        element.style.border = "2px solid";
+        element.style.borderTopColor = "rgba(15, 100, 202, 1)";
+        setTimeout(function() {
+          leftBorder(element);
+        }, 100);
+      } 
+
+      function leftBorder(element) {
+        element.style.borderLeftColor = "rgba(0, 212, 255, 1)";
+        setTimeout(function() {
+          bottomBorder(element);
+        }, 100);
+      }
+
+      function bottomBorder(element) {
+        element.style.borderBottomColor = "rgba(0, 212, 255, 1)";
+        setTimeout(function() {
+          rightBorder(element);
+        }, 100);
+      }
+
+      function rightBorder(element) {
+        element.style.borderRightColor = "rgba(0, 212, 255, 1)";
         
-        //GameController(obj["userName"], obj["userName"]);
-        console.log(obj["userName"]);
-        storeDataObj(obj["userName"]);
+      }
 
-      })
+
+    }
+    
+    const getInputData = ()=> {
+
+        let form = document.querySelector("form");
+        form.addEventListener("submit", (e)=> {
+          //e.preventDefault();
+          const data = new FormData(form);
+          const obj = Object.fromEntries(data);
+          
+          //GameController(obj["userName"], obj["userName"]);
+          console.log(obj["userName"]);
+          storeDataObj(obj["userName"]);
+  
+        })
     }
   
-    return {clearScreen, UserNameInterface, animateBorder, getInputData,};
-  }
-
-
-  const domManip = (playerText, playerAttribute, inputPlaceholder)=> {
-
-    function createFlexContainer(type, height, width){
-      
-      const container = document.createElement(type);
+   const createFlexContainer = (type, height, width)=> {
+    const container = document.createElement(type);
       container.style.height = `${height}px`;
       container.style.width = `${width}px`;
       container.style.display = "flex";
@@ -104,81 +98,64 @@ function Getplayer(id1, id2, id3, id4, playerText, playerAttribute, inputPlaceho
       return container;
     }
   
-    function appendElements(element, elementAppended){
-      element.appendChild(elementAppended);
+
+   const appendElements = (element, elementAppended)=> {
+    element.appendChild(elementAppended);
       return element;
-    }
-  
-    function createForm(){
+   } 
+      
+   const createForm = ()=> {
       let div = createFlexContainer("div", "400", "800");
-      div.style.borderRadius = "50%";
-      div.style.flexDirection = "column";
-      div.style.alignItems = "center";
-      div.style.justifyContent = "center";
-      div.style.gap = "10px";
-      div.style.fontSize = "17px";
-      let h1 = document.createElement('h1');
-      h1.style.fontSize = "35px";
-      h1.style.textShadow = "3.5px 1.75px 1.75px black"
-      let form = document.createElement('form');
-      form.method = "POST";
-      let button = document.createElement('button');
-      let text = document.createTextNode(playerText);
-      let input = document.createElement('input');
-      input.style.width = "293.17px"
-      input.name = "userName";
-      button.type = "submit";
-      button.style.width = "70px";
-      button.innerText = "Submit";
-      h1.appendChild(text);
-      form.appendChild(input);
-      form.appendChild(button);
-      input.setAttribute("id", playerAttribute);
-      input.placeholder = inputPlaceholder;
-      appendElements(div, h1);
-      appendElements(div, form);
-      return div;
+        div.style.borderRadius = "50%";
+        div.style.flexDirection = "column";
+        div.style.alignItems = "center";
+        div.style.justifyContent = "center";
+        div.style.gap = "10px";
+        div.style.fontSize = "17px";
+        let h1 = document.createElement('h1');
+        h1.style.fontSize = "35px";
+        h1.style.textShadow = "3.5px 1.75px 1.75px black"
+        let form = document.createElement('form');
+        form.method = "POST";
+        let button = document.createElement('button');
+        let text = document.createTextNode(playerText);
+        let input = document.createElement('input');
+        input.style.width = "293.17px"
+        input.name = "userName";
+        button.type = "submit";
+        button.style.width = "70px";
+        button.innerText = "Submit";
+        h1.appendChild(text);
+        form.appendChild(input);
+        form.appendChild(button);
+        input.setAttribute("id", playerAttribute);
+        input.placeholder = inputPlaceholder;
+        appendElements(div, h1);
+        appendElements(div, form);
+        return div;
     }
   
-    
-    function addBoarder(element,/*identifier*/ value){
-  
-      element.style.border = value;
-      //This code below would not work
-      //element.style.identifier = value
-      //This is because identifiers are not datatypes they cannot be manipulated by the program
-      return element;
-  
-    }
-  
-   
-    return {createFlexContainer, appendElements, createForm, addBoarder};
-  
-  }
+   const addBorder = (element, value)=> {
+    element.style.border = value;
+    //This code below would not work
+    //element.style.identifier = value
+    //This is because identifiers are not datatypes they cannot be manipulated by the program
+    return element;
+   }
 
-return {intro, domManip,};
-}
-
-
-
-/*function clearTimers(variable){
-  clearInterval(variable);
-}
-
-
-function storeDataObj(element){
-  userName.push(element);
-  console.log(userName[0]);
-}
-
-function clearDom(){
-  let div = document.querySelector("#movingBorder");
-  div.remove();
-}*/
-
-
+   return{intro, userInterface, spinningBorder, getInputData, createFlexContainer, appendElements, createForm, addBorder};
 
 }
+
+const player1 = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
+player1.intro();
+player1.userInterface();
+player1.spinningBorder();
+player1.getInputData();
+
+
+
+
 
 
 
