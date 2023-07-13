@@ -1,8 +1,10 @@
-
-function IntroController(){
-  let num = 0;
 //Create object to store userName data
 let userName = [];
+
+
+function IntroController(){ //Control's intro gameflow 
+  let num = 0;
+
 
 //Start of new IntroGameController module and factory functions
 const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribute, inputPlaceholder)=> {
@@ -80,9 +82,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
           e.preventDefault();
           const data = new FormData(form);
           const obj = Object.fromEntries(data);
-          
           //GameController(obj["userName"], obj["userName"]);
-          console.log(obj["userName"]);
           storeDataObj(obj["userName"]);
           clearTimer();
           clearScreen2();
@@ -90,6 +90,23 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
         })
         return;
     }
+
+    const getInputData2 = ()=> {
+
+      let form = document.querySelector("form");
+      form.addEventListener("submit", (e)=> {
+        e.preventDefault();
+        const data = new FormData(form);
+        const obj = Object.fromEntries(data);
+        //GameController(obj["userName"], obj["userName"]);
+        storeDataObj(obj["userName"]);
+        clearTimer();
+        clearScreen2();
+        
+      })
+      return;
+  }
+
   
    const createFlexContainer = (type, height, width)=> {
     const container = document.createElement(type);
@@ -174,8 +191,19 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
     div.remove();
    }
 
+  //  const oneTime = ()=>{
+  //    let executed = false;
+  //    return function(){
+  //      if(!executed)
+  //      {
+  //        executed = true;
+  //        player2();
+  //      }
+  //    }
+  //  }
+
    
-   return{intro, userInterface, getInputData, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder, clearScreenTransition};
+   return{intro, userInterface, getInputData, getInputData2, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder, clearScreenTransition};
 
 }
 
@@ -199,52 +227,20 @@ const player2 = ()=> {
   const secondPlay = getPlayer(".flex-header", ".turn", ".flex-container", ".container", ".board", "animateBorder", "#animateBorder","Player Two, Enter In Your Name: ", "player2", "Player 2 Name: " );
   secondPlay.userInterface();
   let interval2 = setInterval(secondPlay.spinningBorder, 1000);
-  secondPlay.getInputData();
+  secondPlay.getInputData2();
   setTimeout(()=>{
     clearTimer(interval2)
   }, 10000);
 }
 
+
+
 player1();
-console.log(userName);
+
+console.log(num);
 }
 
-
-
-IntroController();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+IntroController()
 
 
 
@@ -415,4 +411,3 @@ IntroController();
 //   // We don't need to return anything from this module because everything is encapsulated inside this screen controller.
 // }
 
-// ScreenController();
