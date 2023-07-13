@@ -169,8 +169,13 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
      div.remove();
    }
 
+   const clearScreenTransition = ()=>{
+    const div = document.getElementById("animateBorder");
+    div.remove();
+   }
+
    
-   return{intro, userInterface, getInputData, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder};
+   return{intro, userInterface, getInputData, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder, clearScreenTransition};
 
 }
 
@@ -179,22 +184,19 @@ const clearTimer = (intervalVariable)=>{
 }
 
 //Module to control game flow for the first player
-const player1 = (()=>{ 
-const firstPlay = getPlayer(".flex-header", ".turn", ".flex-container", ".container", ".board", "animateBorder", "#animateBorder","Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
-firstPlay.intro();
-firstPlay.userInterface();
-let interval = setInterval(firstPlay.spinningBorder, 1000);
-firstPlay.getInputData();
-setTimeout(()=>{
-  clearTimer(interval)
-}, 10000);
-
-})();
-
-
+const player1 = ()=>{
+  const firstPlay = getPlayer(".flex-header", ".turn", ".flex-container", ".container", ".board", "animateBorder", "#animateBorder","Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
+  firstPlay.intro();
+  firstPlay.userInterface();
+  let interval = setInterval(firstPlay.spinningBorder, 1000);
+  firstPlay.getInputData();
+  setTimeout(()=>{
+    clearTimer(interval)
+  }, 10000);
+}
 
 const player2 = ()=> {
-  const secondPlay = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder", "Player Two, Enter In Your Name: ", "player2", "Player 2 Name: ");
+  const secondPlay = getPlayer(".flex-header", ".turn", ".flex-container", ".container", ".board", "animateBorder", "#animateBorder","Player Two, Enter In Your Name: ", "player2", "Player 2 Name: " );
   secondPlay.userInterface();
   let interval2 = setInterval(secondPlay.spinningBorder, 1000);
   secondPlay.getInputData();
@@ -202,8 +204,9 @@ const player2 = ()=> {
     clearTimer(interval2)
   }, 10000);
 }
-  
 
+player1();
+console.log(userName);
 }
 
 
