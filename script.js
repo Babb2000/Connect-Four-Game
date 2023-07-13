@@ -86,6 +86,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
           storeDataObj(obj["userName"]);
           clearTimer();
           clearScreen2();
+          player2();
         })
         return;
     }
@@ -192,16 +193,16 @@ setTimeout(()=>{
 
 
 
-
-//Module to control game flow for the second player
-// const player2 = (()=>{
-// const secondPlay = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder", "Player Two, Enter In Your Name: ", "player2", "Player 2 Name: ");
-// secondPlay.intro();
-// secondPlay.userInterface();
-// secondPlay.repeatBorder();
-// secondPlay.getInputData();
-// })();
-
+const player2 = ()=> {
+  const secondPlay = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder", "Player Two, Enter In Your Name: ", "player2", "Player 2 Name: ");
+  secondPlay.userInterface();
+  let interval2 = setInterval(secondPlay.spinningBorder, 1000);
+  secondPlay.getInputData();
+  setTimeout(()=>{
+    clearTimer(interval2)
+  }, 10000);
+}
+  
 
 }
 
