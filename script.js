@@ -1,26 +1,26 @@
 
-
-
-
 function IntroController(){
   let num = 0;
 //Create object to store userName data
 let userName = [];
 
 //Start of new IntroGameController module and factory functions
-const getPlayer = (id1, id2, id3, id4, id5, playerText, playerAttribute, inputPlaceholder)=> {
+const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribute, inputPlaceholder)=> {
 
   const intro = ()=> {
-    let div = document.querySelector(id1); //container
-    let div2 = document.querySelector(id2); //flex-header
+    let div = document.querySelector(id1);  //flex-header
+    let div2 = document.querySelector(id2); //turn
     let div3 = document.querySelector(id3); //flex-container
+    let div4 = document.querySelector(id4); //container
+    let div5 = document.querySelector(id5);   //board
     // div.style.display = "none";
     // div2.style.display = "none";
     // div3.style.display = "none";
     div.remove();
     div2.remove();
     div3.remove();
-    
+    div4.remove();
+    div5.remove();
   }
 
     const userInterface = ()=> {
@@ -28,7 +28,7 @@ const getPlayer = (id1, id2, id3, id4, id5, playerText, playerAttribute, inputPl
       mainDiv.style.width = "800px";
       mainDiv.style.height = "400px";
       mainDiv.style.borderRadius = "50%";
-      mainDiv.setAttribute("id", id4); //animateBorder
+      mainDiv.setAttribute("id", id6); //animateBorder
       let text = createForm();
       let rootElement = appendElements(mainDiv, text);
       let main = document.body;
@@ -40,7 +40,7 @@ const getPlayer = (id1, id2, id3, id4, id5, playerText, playerAttribute, inputPl
     
     const spinningBorder = ()=> {
 
-        let div = document.querySelector(id5);
+        let div = document.querySelector(id7);
         topBorder(div);
     
       function topBorder(element) {
@@ -84,7 +84,8 @@ const getPlayer = (id1, id2, id3, id4, id5, playerText, playerAttribute, inputPl
           //GameController(obj["userName"], obj["userName"]);
           console.log(obj["userName"]);
           storeDataObj(obj["userName"]);
-  
+          clearTimer();
+          clearScreen2();
         })
         return;
     }
@@ -167,34 +168,41 @@ const getPlayer = (id1, id2, id3, id4, id5, playerText, playerAttribute, inputPl
      div.remove();
    }
 
-   const repeatBorder = ()=>{
-      setInterval(spinningBorder, 1000);
-   }
-
-   return{intro, userInterface, repeatBorder, getInputData, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2};
+   
+   return{intro, userInterface, getInputData, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder};
 
 }
 
-
-function clearTimer(variable){
-  clearInterval(variable);
+const clearTimer = (intervalVariable)=>{
+  clearInterval(intervalVariable);
 }
 
+//Module to control game flow for the first player
+const player1 = (()=>{ 
+const firstPlay = getPlayer(".flex-header", ".turn", ".flex-container", ".container", ".board", "animateBorder", "#animateBorder","Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
+firstPlay.intro();
+firstPlay.userInterface();
+let interval = setInterval(firstPlay.spinningBorder, 1000);
+firstPlay.getInputData();
+setTimeout(()=>{
+  clearTimer(interval)
+}, 10000);
+
+})();
 
 
-const player1 = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder","Player One, Enter In Your Name: ", "player1", "Player 1 Name: " );
-player1.intro();
-player1.userInterface();
-player1.repeatBorder();
-player1.getInputData();
 
 
+//Module to control game flow for the second player
+// const player2 = (()=>{
+// const secondPlay = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder", "Player Two, Enter In Your Name: ", "player2", "Player 2 Name: ");
+// secondPlay.intro();
+// secondPlay.userInterface();
+// secondPlay.repeatBorder();
+// secondPlay.getInputData();
+// })();
 
-  const player2 = getPlayer(".flex-header", ".flex-container", ".container", "animateBorder", "#animateBorder", "Player Two, Enter In Your Name: ", "player2", "Player 2 Name: ");
-  player2.intro();
-  player2.userInterface();
-  setInterval(player2.spinningBorder, 1000);
-  player2.getInputData();
+
 }
 
 
