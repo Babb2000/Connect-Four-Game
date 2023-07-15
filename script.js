@@ -235,9 +235,7 @@ const player2 = ()=> {
   }, 10000);
 }
 
-
 player1();
-
 }
 
 function Gameboard() {
@@ -274,7 +272,7 @@ function Gameboard() {
   };
 
   const printBoard = () => {
-    const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
+    const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()));
     console.log(boardWithCellValues);
   };
 
@@ -348,16 +346,16 @@ function GameController(playerOneName, playerTwoName){
 }
 
 function ScreenController() {
-  const clearScreen = ()=> {
+  /*const clearScreen = ()=> {
        let div = document.querySelector('.container');
        let div2 = document.querySelector('.flex-header');
        let div3 = document.querySelector('.flex-container');
        div.style.display =  "block";
        div2.style.display = "block";
        div3.style.display = "block";
-  }
+  }*/
 
-  clearScreen();
+  //clearScreen();
 
   const game = GameController();
   const playerTurnDiv = document.querySelector('.turn');
@@ -365,7 +363,7 @@ function ScreenController() {
 
   const updateScreen = () => {
     // clear the board
-    boardDiv.textContent = "";
+    boardDiv.textContent = " ";
 
     // get the newest version of the board and player turn
     const board = game.getBoard();
@@ -373,6 +371,7 @@ function ScreenController() {
 
     // Display player's turn
     playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
+    console.log(playerTurnDiv.textContent);
 
     // Render board squares
     board.forEach(row => {
@@ -390,7 +389,7 @@ function ScreenController() {
   }
 
   // Add event listener for the board
-  function clickHandlerBoard(e) {
+  function clickHandlerBoard(e){
     const selectedColumn = e.target.dataset.column;
     // Make sure I've clicked a column and not the gaps in between
     if (!selectedColumn) return;
@@ -398,6 +397,7 @@ function ScreenController() {
     game.playRound(selectedColumn);
     updateScreen();
   }
+  
   boardDiv.addEventListener("click", clickHandlerBoard);
 
   // Initial render
@@ -407,4 +407,5 @@ function ScreenController() {
 }
 
 IntroController();
-GameController();
+ScreenController();
+
