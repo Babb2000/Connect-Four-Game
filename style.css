@@ -13,7 +13,7 @@ body{
   border: 1px solid black;
   gap: 2px;
   padding: 2px;
-  background-color: blue;
+  background-color: rgb(15,100,202);
 }
 
 .cell {
@@ -23,7 +23,7 @@ body{
   text-align: center;
   font-size: 2rem;
   border: 1px solid grey;
-  background: blue;
+  background: rgba(0,191,255,1);
   cursor: pointer;
   color: white;
 }
@@ -45,4 +45,9 @@ body{
   padding-top: 15px;
   font-size: 35px;
   color: white;
+}
+
+.turn{
+  width: 500px;
+  height: 100px;
 }
