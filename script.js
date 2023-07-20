@@ -393,16 +393,16 @@ function ScreenController() {
   }
 
   // Add event listener for the board
-  // function clickHandlerBoard(e){
-  //   const selectedColumn = e.target.dataset.column;
-  //   // Make sure I've clicked a column and not the gaps in between
-  //   if (!selectedColumn) return;
+  function clickHandlerBoard(e){
+    const selectedColumn = e.target.dataset.column;
+    // Make sure I've clicked a column and not the gaps in between
+    if (!selectedColumn) return;
     
-  //   game.playRound(selectedColumn);
-  //   updateScreen();
-  // }
+    game.playRound(selectedColumn);
+    updateScreen();
+  }
   
-  // boardDiv.addEventListener("click", clickHandlerBoard);
+  boardDiv.addEventListener("click", clickHandlerBoard);
 
   // Initial render
   updateScreen();
