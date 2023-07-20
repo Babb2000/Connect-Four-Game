@@ -40,6 +40,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
       main.appendChild(rootElement);
     }
     
+    //Find another way to animate border, which will stop the animations after the second submit button is clicked
     const spinningBorder = ()=> {
         let div = document.querySelector(id7);
         topBorder(div);
@@ -200,7 +201,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
      div1.appendChild(div2);
      div1.appendChild(div3);
     
-     
+     ScreenController();
 
 
    }
@@ -222,7 +223,7 @@ const player1 = ()=>{
   firstPlay.getInputData();
   setTimeout(()=>{
     clearTimer(interval)
-  }, 10000);
+  }, 4000);
 }
 
 const player2 = ()=> {
@@ -232,7 +233,7 @@ const player2 = ()=> {
   secondPlay.getInputData2();
   setTimeout(()=>{
     clearTimer(interval2)
-  }, 10000);
+  }, 4000);
 }
 
 player1();
@@ -358,16 +359,19 @@ function ScreenController() {
   //clearScreen();
 
   const game = GameController();
+  
   const playerTurnDiv = document.querySelector('.turn');
   const boardDiv = document.querySelector('.board');
 
   const updateScreen = () => {
     // clear the board
-    boardDiv.textContent = " ";
+    console.log(boardDiv);
+    
 
     // get the newest version of the board and player turn
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
+    console.log("right after get active player function call ");
 
     // Display player's turn
     playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
@@ -389,16 +393,16 @@ function ScreenController() {
   }
 
   // Add event listener for the board
-  function clickHandlerBoard(e){
-    const selectedColumn = e.target.dataset.column;
-    // Make sure I've clicked a column and not the gaps in between
-    if (!selectedColumn) return;
+  // function clickHandlerBoard(e){
+  //   const selectedColumn = e.target.dataset.column;
+  //   // Make sure I've clicked a column and not the gaps in between
+  //   if (!selectedColumn) return;
     
-    game.playRound(selectedColumn);
-    updateScreen();
-  }
+  //   game.playRound(selectedColumn);
+  //   updateScreen();
+  // }
   
-  boardDiv.addEventListener("click", clickHandlerBoard);
+  // boardDiv.addEventListener("click", clickHandlerBoard);
 
   // Initial render
   updateScreen();
@@ -407,5 +411,9 @@ function ScreenController() {
 }
 
 IntroController();
-ScreenController();
+
+
+
+
+
 
