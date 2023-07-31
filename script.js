@@ -336,6 +336,27 @@ function GameController(playerOneName, playerTwoName){
 
     /*  This is where we would check for a winner and handle that logic,
         such as a win message. */
+    let winBoard = board.getBoard();
+    let playerTwoCounter = 0;
+    if(getActivePlayer().token === 2)
+      {
+      winBoard.forEach(row => { //Each row
+        let rowNumber = row;
+        row.forEach((cell, index) => { //Each column
+          let colNumber = index;
+            let value = 2;
+            if(cell.getValue() === value)
+            {
+              playerTwoCounter++;
+              console.log(`The value of this cell with coordinates ${rowNumber, colNumber}, is ${value}, or in other words we are currently checking ${getActivePlayer().name}' s marker'` );
+            if(playerTwoCounter === 4)
+            {
+              alert(`${getActivePlayer().name} has won the game!`);
+            }
+            }
+        })
+      })
+  }
 
     switchPlayerTurn();
     printNewRound();
