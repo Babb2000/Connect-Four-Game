@@ -1,4 +1,4 @@
-//Create object to store userName data
+//Create array to store userName data
 let userName = [];
 
 
@@ -14,7 +14,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
     let div2 = document.querySelector(id2); //turn
     let div3 = document.querySelector(id3); //flex-container
     let div4 = document.querySelector(id4); //container
-    let div5 = document.querySelector(id5);   //board
+    let div5 = document.querySelector(id5); //board
     // div.style.display = "none";
     // div2.style.display = "none";
     // div3.style.display = "none";
@@ -26,9 +26,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
   }
 
     const userInterface = ()=> {
-      let mainDiv = createFlexContainer("div", "500", "500");
-      mainDiv.style.width = "800px";
-      mainDiv.style.height = "400px";
+      let mainDiv = createFlexContainer("div", "800", "400");
       mainDiv.style.borderRadius = "50%";
       mainDiv.setAttribute("id", id6); //animateBorder
       let text = createForm();
@@ -47,7 +45,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
       function topBorder(element) {
         element.style.border = "2px solid";
         element.style.borderTopColor = "rgba(15, 100, 202, 1)";
-        setTimeout(function() {
+        setTimeout(function() { 
           leftBorder(element);
         }, 100);
       } 
@@ -75,7 +73,6 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
           e.preventDefault();
           const data = new FormData(form);
           const obj = Object.fromEntries(data);
-          //GameController(obj["userName"], obj["userName"]);
           storeDataObj(obj["userName"]);
           clearTimer();
           clearScreen2();
@@ -89,13 +86,13 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
         e.preventDefault();
         const data = new FormData(form);
         const obj = Object.fromEntries(data);
-        //GameController(obj["userName"], obj["userName"]);
         storeDataObj(obj["userName"]);
         clearTimer();
         clearScreen2();
 
         if(userName.length === 2){
           restoreDom();
+          console.log(userName[0], userName[1]);
           GameController(userName[0], userName[1]);
         }
 
@@ -104,13 +101,15 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
   }
 
   
-   const createFlexContainer = (type, height, width)=> {
+   const createFlexContainer = (type, width, height)=> {
     const container = document.createElement(type);
-      container.style.height = `${height}px`;
       container.style.width = `${width}px`;
+      container.style.height = `${height}px`;
       container.style.display = "flex";
       container.style.justifyContent = "center";
       container.alignItems = "center";
+      
+      console.log(container);
     
       return container;
     }
@@ -122,7 +121,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
    } 
       
    const createForm = ()=> {
-      let div = createFlexContainer("div", "400", "800");
+      let div = createFlexContainer("div", "800", "400");
         div.style.borderRadius = "50%";
         div.style.flexDirection = "column";
         div.style.alignItems = "center";
@@ -175,6 +174,7 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
 
    const storeDataObj = (obj)=> {
      userName.push(obj);
+     console.log(userName);
    }
 
    const clearScreen2 = ()=>{
@@ -201,18 +201,14 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
      div1.appendChild(div2);
      div1.appendChild(div3);
     
-     ScreenController();
-
-
+     callScreenController();
    }
    
    return{intro, userInterface, getInputData, getInputData2, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder, clearScreenTransition, restoreDom};
 
 }
 
-const clearTimer = (intervalVariable)=>{
-  clearInterval(intervalVariable);
-}
+
 
 //Module to control game flow for the first player
 const player1 = ()=>{
@@ -237,6 +233,14 @@ const player2 = ()=> {
 }
 
 player1();
+}
+
+function callScreenController(){
+  ScreenController();
+}
+
+const clearTimer = (intervalVariable)=>{
+  clearInterval(intervalVariable);
 }
 
 function Gameboard() {
@@ -297,7 +301,6 @@ function Cell() {
 
 
 function GameController(playerOneName, playerTwoName){
-
   const board = Gameboard();
 
 
@@ -347,17 +350,7 @@ function GameController(playerOneName, playerTwoName){
 }
 
 function ScreenController() {
-  /*const clearScreen = ()=> {
-       let div = document.querySelector('.container');
-       let div2 = document.querySelector('.flex-header');
-       let div3 = document.querySelector('.flex-container');
-       div.style.display =  "block";
-       div2.style.display = "block";
-       div3.style.display = "block";
-  }*/
-
-  //clearScreen();
-
+ 
   const game = GameController();
   
   const playerTurnDiv = document.querySelector('.turn');
@@ -371,11 +364,12 @@ function ScreenController() {
     // get the newest version of the board and player turn
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
-    console.log("right after get active player function call ");
+   
 
     // Display player's turn
-    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
-    console.log(playerTurnDiv.textContent);
+    console.log(playerTurnDiv);
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
+    
 
     // Render board squares
     board.forEach(row => {
@@ -395,6 +389,7 @@ function ScreenController() {
   // Add event listener for the board
   function clickHandlerBoard(e){
     const selectedColumn = e.target.dataset.column;
+    console.log(selectedColumn);
     // Make sure I've clicked a column and not the gaps in between
     if (!selectedColumn) return;
     
