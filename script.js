@@ -350,7 +350,7 @@ function GameController(playerOneName, playerTwoName){
   };
 }
 
-function ScreenController() {
+function ScreenController() { 
  
   let [firstName, secondName] = userName;
   const game = GameController(firstName, secondName);
@@ -363,6 +363,7 @@ function ScreenController() {
 
   const updateScreen = () => {
     // clear the board
+    boardDiv.textContent = " ";
     
 
     // get the newest version of the board and player turn
