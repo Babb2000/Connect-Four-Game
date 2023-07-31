@@ -356,6 +356,9 @@ function ScreenController() {
   const game = GameController(firstName, secondName);
   
   const playerTurnDiv = document.querySelector('.turn');
+  playerTurnDiv.style.fontSize = "35px";
+  playerTurnDiv.style.display = "flex";
+  playerTurnDiv.style.justifyContent = "center";
   const boardDiv = document.querySelector('.board');
 
   const updateScreen = () => {
