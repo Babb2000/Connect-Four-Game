@@ -3,7 +3,8 @@ let userName = [];
 
 
 function IntroController(){ //Control's intro gameflow 
-  let num = 0;
+
+
 
 //Start of new IntroGameController module and factory functions
 const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribute, inputPlaceholder)=> {
@@ -350,6 +351,7 @@ function GameController(playerOneName, playerTwoName){
   };
 }
 
+
 function ScreenController() { 
  
   let [firstName, secondName] = userName;
@@ -369,13 +371,10 @@ function ScreenController() {
     // get the newest version of the board and player turn
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
-    console.log(activePlayer);
-   
-
+  
     // Display player's turn
     playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
 
-    
 
     // Render board squares
     board.forEach(row => {
