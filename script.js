@@ -5,7 +5,6 @@ let userName = [];
 function IntroController(){ //Control's intro gameflow 
   let num = 0;
 
-
 //Start of new IntroGameController module and factory functions
 const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribute, inputPlaceholder)=> {
 
@@ -92,8 +91,6 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
 
         if(userName.length === 2){
           restoreDom();
-          console.log(userName[0], userName[1]);
-          GameController(userName[0], userName[1]);
         }
 
       })
@@ -109,8 +106,6 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
       container.style.justifyContent = "center";
       container.alignItems = "center";
       
-      console.log(container);
-    
       return container;
     }
   
@@ -174,7 +169,6 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
 
    const storeDataObj = (obj)=> {
      userName.push(obj);
-     console.log(userName);
    }
 
    const clearScreen2 = ()=>{
@@ -200,15 +194,13 @@ const getPlayer = (id1, id2, id3, id4, id5, id6, id7, playerText, playerAttribut
      div.appendChild(div1);
      div1.appendChild(div2);
      div1.appendChild(div3);
-    
+
      callScreenController();
    }
    
    return{intro, userInterface, getInputData, getInputData2, createFlexContainer, appendElements, createForm, addBorder, removeAnimateDiv, formStatus, storeDataObj, clearScreen2, spinningBorder, clearScreenTransition, restoreDom};
 
 }
-
-
 
 //Module to control game flow for the first player
 const player1 = ()=>{
@@ -235,6 +227,7 @@ const player2 = ()=> {
 player1();
 }
 
+
 function callScreenController(){
   ScreenController();
 }
@@ -242,6 +235,8 @@ function callScreenController(){
 const clearTimer = (intervalVariable)=>{
   clearInterval(intervalVariable);
 }
+
+
 
 function Gameboard() {
   const rows = 6;
@@ -284,6 +279,8 @@ function Gameboard() {
   return { getBoard, dropToken, printBoard };
 }
 
+
+
 function Cell() {
   let value = 0;
 
@@ -315,12 +312,15 @@ function GameController(playerOneName, playerTwoName){
     }
   ];
 
+
   let activePlayer = players[0];
+  console.log(activePlayer.name);
 
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
   const getActivePlayer = () => activePlayer;
+  
 
   const printNewRound = () => {
     board.printBoard();
@@ -341,6 +341,7 @@ function GameController(playerOneName, playerTwoName){
   };
 
   printNewRound();
+  
 
   return {
     playRound,
@@ -351,24 +352,25 @@ function GameController(playerOneName, playerTwoName){
 
 function ScreenController() {
  
-  const game = GameController();
+  let [firstName, secondName] = userName;
+  const game = GameController(firstName, secondName);
   
   const playerTurnDiv = document.querySelector('.turn');
   const boardDiv = document.querySelector('.board');
 
   const updateScreen = () => {
     // clear the board
-    console.log(boardDiv);
     
 
     // get the newest version of the board and player turn
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
+    console.log(activePlayer);
    
 
     // Display player's turn
-    console.log(playerTurnDiv);
     playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
+
     
 
     // Render board squares
