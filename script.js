@@ -349,19 +349,53 @@ function GameController(playerOneName, playerTwoName){
             {
               playerTwoCounter++;
               console.log(`The value of this cell with coordinates ${rowNumber, colNumber}, is ${value}, or in other words we are currently checking ${getActivePlayer().name}' s marker'` );
-            if(playerTwoCounter === 4)
+            if(playerTwoCounter === 4) //If there are at least a total of 4 tokens on the board check to see if a player two one the game
             {
-              alert(`${getActivePlayer().name} has won the game!`);
+              checkOrder();
             }
-            }
+          }
         })
       })
-  }
+    }
+
+
+    const checkOrder = () => {
+     //Find the lowest row that has no tokens
+     const availableCells = winBoard.filter((row) => row[column].getValue() === 0).map(row => row[column]);
+     const lowestRow = availableCells - 1;
+     
+     //Create an array of objects to hold the position of the player marker
+     let markerArray = [];
+     const position = {
+       rowNumber: 0,
+       columnNumber: 0,
+     };
+
+      //Develop an algorithm that checks to see if the four numbers on the gameboard are placed vertically on top of one another
+     
+     winBoard.forEach(row => {
+       row.forEach((cell, index) => {
+         if(cell.getValue() === 2)
+         {
+          let rowIndex = row;
+          let columnIndex = index;
+          position.rowNumber = rowIndex;
+          position.columnNumber = columnIndex;
+          markerArray.push(position);
+         }
+       })
+     })
+          
+
+         
+
+      
+    
 
     switchPlayerTurn();
     printNewRound();
-  };
-
+  
+    };
   printNewRound();
   
 
@@ -429,11 +463,10 @@ function ScreenController() {
   updateScreen();
 
   // We don't need to return anything from this module because everything is encapsulated inside this screen controller.
+
 }
 
 IntroController();
-
-
 
 
 
