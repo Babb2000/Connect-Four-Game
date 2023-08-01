@@ -330,56 +330,6 @@ function GameController(playerOneName, playerTwoName){
 
 
 
-  const checkOrder = (col) => {
-    
-    let winBoard = board.getBoard();
-    //Find the lowest row that has no tokens
-    const availableCells = winBoard.filter((row) => row[col].getValue() === 0).map(row => row[col]);
-    const lowestRow = (availableCells.length - 1);
-   
-    
-    // //Create an array of objects to hold the position of the player marker
-    let markerArray = [];
-    // const position = {};
-
-     //Develop an algorithm that checks to see if the four numbers on the gameboard are placed vertically on top of one another
-   
-    markerArray.push(col);
-    //Currently at column 0 
-    let value = 2;
-    let count = 0;
-  
-      winBoard.forEach(row=> {
-        row.forEach((cell, index)=>{
-         console.log(count);
-         //Check to see if each consecutive row has the value 2 in it's cell
-         if(cell.getValue() === value){
-           count++;
-           console.log(count);
-         }
-         else if(!cell.getValue() === value)
-         {
-           count--;
-         }
- 
-         if(count === 4)
-         {
-           //Create a function to call which stops the current gameflow of the game and gives the user an option to playAgain
-          const playerTurnDiv = document.querySelector('.turn');
-          playerTurnDiv.textContent = `${getActivePlayer().name} IS THE WINNER!`;
-         
-           return;
-         }
-        })
-      })
-
-    
-       
-    console.log(markerArray);
-   }
-
-
-
   const playRound = (column) => {
     board.dropToken(column, getActivePlayer().token);
 
@@ -401,7 +351,8 @@ function GameController(playerOneName, playerTwoName){
               console.log(`The value of this cell with coordinates ${rowNumber, colNumber}, is ${value}, or in other words we are currently checking ${getActivePlayer().name}' s marker'` );
             if(playerTwoCounter === 4) //If there are at least a total of 4 tokens on the board check to see if a player two one the game
             {
-              checkOrder(colNumber);
+              alert(`${getActivePlayer().name} is the winner!!!!`);
+              
             }
           }
         })
@@ -487,6 +438,8 @@ function ScreenController() {
   // We don't need to return anything from this module because everything is encapsulated inside this screen controller.
 
 }
+
+
 
 IntroController();
 
