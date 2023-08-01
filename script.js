@@ -331,33 +331,60 @@ function GameController(playerOneName, playerTwoName){
 
 
   const playRound = (column) => {
+    let numRows = 6;
+    let numColumns = 7;
+    let value = 2;
+    let counter = 0;
+    let playerTwoCounter = 0;
+
     board.dropToken(column, getActivePlayer().token);
 
     /*  This is where we would check for a winner and handle that logic,
         such as a win message. */
     let winBoard = board.getBoard();
-    let playerTwoCounter = 0;
-    let value = 2;
+    // let playerTwoCounter = 0;
+    // let value = 2;
+    // const availableCells = winBoard.filter((row) => row[column].getValue() === 0).map(row => row[column]);
+    // const lowestRow = availableCells.length - 1;
 
-    if(getActivePlayer().token === 2)
-      {
-      winBoard.forEach(row => { //Each row
-        let rowNumber = row;
-        row.forEach((cell, index) => { //Each column
-          let colNumber = index;
-            if(cell.getValue() === value)
-            {
-              playerTwoCounter++;
-              console.log(`The value of this cell with coordinates ${rowNumber, colNumber}, is ${value}, or in other words we are currently checking ${getActivePlayer().name}' s marker'` );
-            if(playerTwoCounter === 4) //If there are at least a total of 4 tokens on the board check to see if a player two one the game
-            {
-              alert(`${getActivePlayer().name} is the winner!!!!`);
-              
+
+    //Loop through all the rows starting at the lowest row or highest row
+    //Set a counter variable that increments everytime it comes across a value of 2
+    //Decrement counter variable if it comes across a value other than 2
+    //If the counter reaches the number four before the loop terminates, that means a player has won the game
+    if(getActivePlayer().token === 2){
+      winBoard.forEach(row=>{
+        row.forEach((cell,index)=> {
+          if(cell.getValue() === value){
+            playerTwoCounter++;
+            if(playerTwoCounter === 4){
+              for(let i = 0; i < numRows; i++)
+               {
+                 for(let j = 0; j < numColumns; j++){
+                  console.log("inside second for loop");
+                  if(winBoard[i][j].getValue() === value){ //Even though its a 2D array I need to only check if the rows since the outer loop took care of the column
+                    console.log(winBoard[i][j].getValue());
+                    counter++;
+                    if(counter === 4){
+                      alert(`${getActivePlayer().name} has won the game!!!`);
+                    }
+                    else{
+                      count--;
+                    }
+                  }
+                 }
+               }
             }
           }
         })
       })
     }
+    
+
+
+
+    
+    
 
 
          
