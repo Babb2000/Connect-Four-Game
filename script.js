@@ -361,15 +361,19 @@ function GameController(playerOneName, playerTwoName){
               for(let i = 0; i < numRows; i++)
                {
                  for(let j = 0; j < numColumns; j++){
+                   console.log(i);
+                   console.log(j);
                   console.log("inside second for loop");
                   if(winBoard[i][j].getValue() === value){ //Even though its a 2D array I need to only check if the rows since the outer loop took care of the column
                     console.log(winBoard[i][j].getValue());
                     counter++;
+                    console.log(counter);
                     if(counter === 4){
+                      console.log(counter);
                       alert(`${getActivePlayer().name} has won the game!!!`);
                     }
                     else{
-                      count--;
+                      counter--;
                     }
                   }
                  }
