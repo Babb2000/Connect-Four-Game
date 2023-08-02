@@ -333,6 +333,8 @@ function GameController(playerOneName, playerTwoName){
   const playRound = (column) => {
     let numRows = 6;
     let numColumns = 7;
+    let keyVal = 4;
+    let holdNum = 0;
     let value = 2;
     let counter = 0;
     let playerTwoCounter = 0;
@@ -363,17 +365,18 @@ function GameController(playerOneName, playerTwoName){
                  for(let j = 0; j < numColumns; j++){
                    console.log(i);
                    console.log(j);
-                  console.log("inside second for loop");
+                   console.log(" ");
                   if(winBoard[i][j].getValue() === value){ //Even though its a 2D array I need to only check if the rows since the outer loop took care of the column
                     console.log(winBoard[i][j].getValue());
                     counter++;
-                    console.log(counter);
-                    if(counter === 4){
-                      console.log(counter);
+                    holdNum += counter;
+                    console.log(holdNum)
+                    if(holdNum === 4){
                       alert(`${getActivePlayer().name} has won the game!!!`);
                     }
-                    else{
-                      counter--;
+                    else if (holdNum != 4)
+                    {
+                      holdNum--;
                     }
                   }
                  }
