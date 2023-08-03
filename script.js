@@ -333,21 +333,24 @@ function GameController(playerOneName, playerTwoName){
     let counter = 0;
     let currentRow = (lowestRow + 1);
     let rowsLeft = (arr.length - currentRow);
+    let unDef = undefined;
 
 
     //Iterate through each column
     for(let column = 0; column < arr[0].length; column++){ //There are 7 columns 
       //Iterate through each row
      
-        for(let row = currentRow; row <= arr.length; row++){ //On row 2 rowsLeft = 6 -2 = 4; row++
-                                                        
-          console.log(`The current row we are on is => ${row}`);
-          console.log(`The number of rows left is => ${arr.length - row}`);
+        for(let row = currentRow; row < arr.length; row++){ //On row 2 rowsLeft = 6 -2 = 4; row++
+                                 
+          console.log(`The current (x,y) coordinates for out current position is: 
+          (${column}, ${row})`);
+          console.log(`${arr[row][column].getValue()}`);
           console.log(" ");
         
          
-            console.log(arr[row][column].getValue());
-          if(arr[row][column].getValue() === currentPlayerToken) //If the current row and column is not equal  arr[2][0] = 2 //So arr[2][0] is not equal to arr[0][0] return false
+  
+          console.log(arr[row][column].getValue());
+          if(arr[row][column].getValue() == currentPlayerToken) //If the current row and column is not equal  arr[2][0] = 2 //So arr[2][0] is not equal to arr[0][0] return false
           {
             counter++;
             console.log(counter);
@@ -356,8 +359,8 @@ function GameController(playerOneName, playerTwoName){
               alert(`${getActivePlayer().name} is the Winner`);
                }
           }
-          else if(arr[row][column] != currentPlayerToken){
-            counter--;
+          else if(arr[row][column] != currentPlayerToken || arr[row][column] === unDef){
+            counter = 0;
             return;
           }
           
