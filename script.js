@@ -329,10 +329,47 @@ function GameController(playerOneName, playerTwoName){
   };
 
 
+  function checkSameValInColumn(arr, lowestRow ){
+    let counter = 0;
+    let currentRow = (lowestRow + 1);
+    let rowsLeft = (arr.length - currentRow);
+    //Iterate through each column
+    for(let column = 0; column < arr[0].length; column++){ //There are 7 columns 
+      //Iterate through each row
+     
+        for(let row = currentRow; row <= arr.length; row++){ //On row 2 rowsLeft = 6 -2 = 4; row++
+                                                        
+          console.log(`The current row we are on is => ${row}`);
+          console.log(`The number of rows left is => ${arr.length - row}`);
+          console.log(" ");
+        
+         
+            console.log(arr[row][column].getValue());
+          if(arr[row][column].getValue() === 2) //If the current row and column is not equal  arr[2][0] = 2 //So arr[2][0] is not equal to arr[0][0] return false
+          {
+            counter++;
+            console.log(counter);
+              if(counter === 4)
+               {
+              alert(`${getActivePlayer().name} is the Winner`);
+               }
+          }
+          else if(arr[row][column] != 2){
+            counter--;
+            return;
+          }
+          
+        }
+      
+     
+    }
+
+    
+  }
 
   const playRound = (column) => {
-    let numRows = 6;
-    let numColumns = 7;
+  
+    
     let keyVal = 4;
     let holdNum = 0;
     let value = 2;
@@ -346,8 +383,8 @@ function GameController(playerOneName, playerTwoName){
     let winBoard = board.getBoard();
     // let playerTwoCounter = 0;
     // let value = 2;
-    // const availableCells = winBoard.filter((row) => row[column].getValue() === 0).map(row => row[column]);
-    // const lowestRow = availableCells.length - 1;
+    const availableCells = winBoard.filter((row) => row[column].getValue() === 0).map(row => row[column]);
+    const lowestRow = availableCells.length - 1;
 
 
     //Loop through all the rows starting at the lowest row or highest row
@@ -360,27 +397,7 @@ function GameController(playerOneName, playerTwoName){
           if(cell.getValue() === value){
             playerTwoCounter++;
             if(playerTwoCounter === 4){
-              for(let i = 0; i < numRows; i++)
-               {
-                 for(let j = 0; j < numColumns; j++){
-                   console.log(i);
-                   console.log(j);
-                   console.log(" ");
-                  if(winBoard[i][j].getValue() === value){ //Even though its a 2D array I need to only check if the rows since the outer loop took care of the column
-                    console.log(winBoard[i][j].getValue());
-                    counter++;
-                    holdNum += counter;
-                    console.log(holdNum)
-                    if(holdNum === 4){
-                      alert(`${getActivePlayer().name} has won the game!!!`);
-                    }
-                    else if (holdNum != 4)
-                    {
-                      holdNum--;
-                    }
-                  }
-                 }
-               }
+              checkSameValInColumn(winBoard, lowestRow);
             }
           }
         })
