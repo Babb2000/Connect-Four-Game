@@ -329,10 +329,12 @@ function GameController(playerOneName, playerTwoName){
   };
 
 
-  function checkSameValInColumn(arr, lowestRow ){
+  function checkSameValInColumn(arr, lowestRow, currentPlayerToken){
     let counter = 0;
     let currentRow = (lowestRow + 1);
     let rowsLeft = (arr.length - currentRow);
+
+
     //Iterate through each column
     for(let column = 0; column < arr[0].length; column++){ //There are 7 columns 
       //Iterate through each row
@@ -345,7 +347,7 @@ function GameController(playerOneName, playerTwoName){
         
          
             console.log(arr[row][column].getValue());
-          if(arr[row][column].getValue() === 2) //If the current row and column is not equal  arr[2][0] = 2 //So arr[2][0] is not equal to arr[0][0] return false
+          if(arr[row][column].getValue() === currentPlayerToken) //If the current row and column is not equal  arr[2][0] = 2 //So arr[2][0] is not equal to arr[0][0] return false
           {
             counter++;
             console.log(counter);
@@ -354,7 +356,7 @@ function GameController(playerOneName, playerTwoName){
               alert(`${getActivePlayer().name} is the Winner`);
                }
           }
-          else if(arr[row][column] != 2){
+          else if(arr[row][column] != currentPlayerToken){
             counter--;
             return;
           }
@@ -364,19 +366,24 @@ function GameController(playerOneName, playerTwoName){
      
     }
 
+
+
+
     
   }
 
   const playRound = (column) => {
   
-    
     let keyVal = 4;
     let holdNum = 0;
-    let value = 2;
+    
     let counter = 0;
     let playerTwoCounter = 0;
 
+   
+
     board.dropToken(column, getActivePlayer().token);
+    let value = getActivePlayer().token;
 
     /*  This is where we would check for a winner and handle that logic,
         such as a win message. */
@@ -397,7 +404,20 @@ function GameController(playerOneName, playerTwoName){
           if(cell.getValue() === value){
             playerTwoCounter++;
             if(playerTwoCounter === 4){
-              checkSameValInColumn(winBoard, lowestRow);
+              checkSameValInColumn(winBoard, lowestRow, getActivePlayer().token);
+            }
+          }
+        })
+      })
+    }
+
+    if(getActivePlayer().token === 1){
+      winBoard.forEach(row=>{
+        row.forEach((cell,index)=> {
+          if(cell.getValue() === value){
+            playerTwoCounter++;
+            if(playerTwoCounter === 4){
+              checkSameValInColumn(winBoard, lowestRow, getActivePlayer().token);
             }
           }
         })
