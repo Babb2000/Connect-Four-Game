@@ -339,7 +339,7 @@ function GameController(playerOneName, playerTwoName){
         such as a win message. */
 
     let winBoard = board.getBoard();
-    console.log(winBoard);
+   
     
     //Combination of Winning Arrays
     const winningArrays = [
@@ -415,12 +415,12 @@ function GameController(playerOneName, playerTwoName){
     ]
 
 
-      winBoard.forEach(row =>{
-        row.forEach((index)=>{
-          console.log(`Current Cell Value is => ${index.getValue()}`);
-          console.log(" ");
-        })
-      })
+      for(let i = 0; i < 6; i++){
+        for(let j = 0; j < winBoard.length; j++){
+          const current = winBoard[i][j].getValue();
+          console.log(`The token of the current cell at index ${i}, ${j}, is: ${current}`);
+        }
+      }
     
 
   
