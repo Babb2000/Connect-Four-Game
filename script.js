@@ -329,103 +329,109 @@ function GameController(playerOneName, playerTwoName){
   };
 
 
-  function checkSameValInColumn(arr, lowestRow, currentPlayerToken){
-    let counter = 0;
-    let currentRow = (lowestRow + 1);
-    let rowsLeft = (arr.length - currentRow);
-    let unDef = undefined;
-
-
-    //Iterate through each column
-    for(let column = 0; column < arr[0].length; column++){ //There are 7 columns 
-      //Iterate through each row
-     
-        for(let row = currentRow; row < arr.length; row++){ //On row 2 rowsLeft = 6 -2 = 4; row++
-                                 
-          console.log(`The current (x,y) coordinates for out current position is: 
-          (${column}, ${row})`);
-          console.log(`${arr[row][column].getValue()}`);
-          console.log(" ");
-        
-         
-  
-          console.log(arr[row][column].getValue());
-          if(arr[row][column].getValue() == currentPlayerToken) //If the current row and column is not equal  arr[2][0] = 2 //So arr[2][0] is not equal to arr[0][0] return false
-          {
-            counter++;
-            console.log(counter);
-              if(counter === 4)
-               {
-              alert(`${getActivePlayer().name} is the Winner`);
-               }
-          }
-          else if(arr[row][column] != currentPlayerToken || arr[row][column] === unDef){
-            counter = 0;
-            return;
-          }
-          
-        }
-      
-     
-    }
-
-
-
-
-    
-  }
-
   const playRound = (column) => {
   
-    let keyVal = 4;
-    let holdNum = 0;
     
-    let counter = 0;
-    let playerTwoCounter = 0;
-
-   
-
     board.dropToken(column, getActivePlayer().token);
     let value = getActivePlayer().token;
 
     /*  This is where we would check for a winner and handle that logic,
         such as a win message. */
+
     let winBoard = board.getBoard();
-    // let playerTwoCounter = 0;
-    // let value = 2;
-    const availableCells = winBoard.filter((row) => row[column].getValue() === 0).map(row => row[column]);
-    const lowestRow = availableCells.length - 1;
+    console.log(winBoard);
+    
+    //Combination of Winning Arrays
+    const winningArrays = [
+      [0, 1, 2, 3],
+      [41, 40, 39, 38],
+      [7, 8, 9, 10],
+      [34, 33, 32, 31],
+      [14, 15, 16, 17],
+      [27, 26, 25, 24],
+      [21, 22, 23, 24],
+      [20, 19, 18, 17],
+      [28, 29, 30, 31],
+      [13, 12, 11, 10],
+      [35, 36, 37, 38],
+      [6, 5, 4, 3],
+      [0, 7, 14, 21],
+      [41, 34, 27, 20],
+      [1, 8, 15, 22],
+      [40, 33, 26, 19],
+      [2, 9, 16, 23],
+      [39, 32, 25, 18],
+      [3, 10, 17, 24],
+      [38, 31, 24, 17],
+      [4, 11, 18, 25],
+      [37, 30, 23, 16],
+      [5, 12, 19, 26],
+      [36, 29, 22, 15],
+      [6, 13, 20, 27],
+      [35, 28, 21, 14],
+      [0, 8, 16, 24],
+      [41, 33, 25, 17],
+      [7, 15, 23, 31],
+      [34, 26, 18, 10],
+      [14, 22, 30, 38],
+      [27, 19, 11, 3],
+      [35, 29, 23, 17],
+      [6, 12, 18, 24],
+      [28, 22, 16, 10],
+      [13, 19, 25, 31],
+      [21, 15, 9, 3],
+      [20, 26, 32, 38],
+      [36, 30, 24, 18],
+      [5, 11, 17, 23],
+      [37, 31, 25, 19],
+      [4, 10, 16, 22],
+      [2, 10, 18, 26],
+      [39, 31, 23, 15],
+      [1, 9, 17, 25],
+      [40, 32, 24, 16],
+      [9, 17, 25, 33],
+      [8, 16, 24, 32],
+      [11, 17, 23, 29],
+      [12, 18, 24, 30],
+      [1, 2, 3, 4],
+      [5, 4, 3, 2],
+      [8, 9, 10, 11],
+      [12, 11, 10, 9],
+      [15, 16, 17, 18],
+      [19, 18, 17, 16],
+      [22, 23, 24, 25],
+      [26, 25, 24, 23],
+      [29, 30, 31, 32],
+      [33, 32, 31, 30],
+      [36, 37, 38, 39],
+      [40, 39, 38, 37],
+      [7, 14, 21, 28],
+      [8, 15, 22, 29],
+      [9, 16, 23, 30],
+      [10, 17, 24, 31],
+      [11, 18, 25, 32],
+      [12, 19, 26, 33],
+      [13, 20, 27, 34],
+    ]
 
 
-    //Loop through all the rows starting at the lowest row or highest row
-    //Set a counter variable that increments everytime it comes across a value of 2
-    //Decrement counter variable if it comes across a value other than 2
-    //If the counter reaches the number four before the loop terminates, that means a player has won the game
-    if(getActivePlayer().token === 2){
-      winBoard.forEach(row=>{
-        row.forEach((cell,index)=> {
-          if(cell.getValue() === value){
-            playerTwoCounter++;
-            if(playerTwoCounter === 4){
-              checkSameValInColumn(winBoard, lowestRow, getActivePlayer().token);
-            }
-          }
+      winBoard.forEach(row =>{
+        row.forEach((index)=>{
+          console.log(`Current Cell Value is => ${index.getValue()}`);
+          console.log(" ");
         })
       })
-    }
+    
 
-    if(getActivePlayer().token === 1){
-      winBoard.forEach(row=>{
-        row.forEach((cell,index)=> {
-          if(cell.getValue() === value){
-            playerTwoCounter++;
-            if(playerTwoCounter === 4){
-              checkSameValInColumn(winBoard, lowestRow, getActivePlayer().token);
-            }
-          }
-        })
-      })
-    }
+  
+        //Check the four square retrieved and see if they are from player one or player 2 / value of the inside is 1 or two
+      
+    
+      
+    
+
+
+   
     
 
 
