@@ -1,5 +1,8 @@
 //Create array to store userName data
 let userName = [];
+let iterationCounter = 0;
+let newArr = [];
+let connectCounter = -1;
 
 
 function IntroController(){ //Control's intro gameflow 
@@ -415,35 +418,14 @@ function GameController(playerOneName, playerTwoName){
     ]
 
 
-      for(let i = 0; i < 6; i++){
-        for(let j = 0; j < winBoard.length; j++){
-          const current = winBoard[i][j].getValue();
-          console.log(`The token of the current cell at index ${i}, ${j}, is: ${current}`);
-        }
-      }
-    
-
   
-        //Check the four square retrieved and see if they are from player one or player 2 / value of the inside is 1 or two
+  
+        //Create an array, for the current element inside the 2D gameboard array assign a number 0-41 to that element and append that number into a new array
       
     
       
     
 
-
-   
-    
-
-
-
-    
-    
-
-
-         
-
-      
-    
 
     switchPlayerTurn();
     printNewRound();
@@ -487,12 +469,13 @@ function ScreenController() {
     // Render board squares
     board.forEach(row => {
       row.forEach((cell, index) => {
+        ++connectCounter;
         // Anything clickable should be a button!!
         const cellButton = document.createElement("button");
         cellButton.classList.add("cell");
         // Create a data attribute to identify the column
         // This makes it easier to pass into our `playRound` function 
-        cellButton.dataset.column = index
+        cellButton.dataset.column = connectCounter;
         cellButton.textContent = cell.getValue();
         boardDiv.appendChild(cellButton);
       })
