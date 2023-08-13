@@ -2,7 +2,9 @@
 let userName = [];
 let iterationCounter = 0;
 let newArr = [];
-let connectCounter = -1;
+let twoInc = 0;
+let connectFourCounter = -1;
+
 
 
 function IntroController(){ //Control's intro gameflow 
@@ -336,13 +338,13 @@ function GameController(playerOneName, playerTwoName){
   
     
     board.dropToken(column, getActivePlayer().token);
-    let value = getActivePlayer().token;
+    
 
     /*  This is where we would check for a winner and handle that logic,
         such as a win message. */
 
-    let winBoard = board.getBoard();
-   
+    const winBoard = board.getBoard();
+    const playerTwoCombo = [];
     
     //Combination of Winning Arrays
     const winningArrays = [
@@ -418,9 +420,36 @@ function GameController(playerOneName, playerTwoName){
     ]
 
 
+    //Check if player 2 got four in a row 
+    winBoard.forEach((row) =>{
+      row.forEach((column, index) =>{
+        if(column.getValue === 2){
+          twoInc++;
+          if(twoInc % 4 === 0) //Once there is atleast 4 ("2's on the game board")
+          {
+            //Now I am going to step through the array again and this time assign a number to each of the cells that have a token
+            winBoard.forEach((row) =>{
+              row.forEach((column, index) =>{
+                if(column.getValue === 2){
+                  winBoard.forEach((row) =>{
+                    row.forEach((column, index) =>{
+                      connectFourCounter++;
+                      column.dataset.column = connectFourCounter;
+                      playerTwoCombo.push(holder);
+                      console.log(playerTwoCombo);
+                    })
+                  })
+                 
+                }
+              })
+            })// End of second forEach
+          }
+        }
+      })
+    }) //End of first forEach
+   
+    
   
-  
-        //Create an array, for the current element inside the 2D gameboard array assign a number 0-41 to that element and append that number into a new array
       
     
       
@@ -469,13 +498,12 @@ function ScreenController() {
     // Render board squares
     board.forEach(row => {
       row.forEach((cell, index) => {
-        ++connectCounter;
         // Anything clickable should be a button!!
         const cellButton = document.createElement("button");
         cellButton.classList.add("cell");
         // Create a data attribute to identify the column
         // This makes it easier to pass into our `playRound` function 
-        cellButton.dataset.column = connectCounter;
+        cellButton.dataset.column = index;
         cellButton.textContent = cell.getValue();
         boardDiv.appendChild(cellButton);
       })
