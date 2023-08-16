@@ -341,6 +341,7 @@ function GameController(playerOneName, playerTwoName){
     let indexNumTwo = -1;
     let firstArr = [];
     let secondArr = [];
+    let winCombo;
     
 
     console.log("Inside fourTokens");
@@ -362,15 +363,16 @@ function GameController(playerOneName, playerTwoName){
             
             for(let k = 0; k < 6; k++){
               for(let l = 0; l < 7; l++){
-                if(currentBoard[i][j].getValue() === 1){
+                if(currentBoard[i][j].getValue() === 1 && currentBoard[i][j].getValue() != 2 && currentBoard[i][j].getValue() != 0){
                   currentBoard[i][j].numericVal1 = numericVal1;
+                   winCombo = currentBoard[i][j].numericVal1;
+                  firstArr.push(winCombo);
                   numericVal1++;
                 }
+                console.log(`The cell number with a winning token => ${winCombo}`);
+
               }
             }
-           
-         
-            
           }
         }
         else if(currentBoard[i][j].getValue() === 2){
