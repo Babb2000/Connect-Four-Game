@@ -337,6 +337,12 @@ function GameController(playerOneName, playerTwoName){
   const fourTokens = () => {
     let tokenOneInc = 0;
     let tokenTwoInc = 0;
+    let indexNumOne = -1;
+    let indexNumTwo = -1;
+    let firstArr = [];
+    let secondArr = [];
+    
+
     console.log("Inside fourTokens");
     
     /*This function checks if the current board has 4 of a given token 
@@ -350,23 +356,23 @@ function GameController(playerOneName, playerTwoName){
         //Check if the currentBoard has 4n multiples of 1
         if(currentBoard[i][j].getValue() === 1){
           tokenOneInc++;
-          console.log(`The value of tokenOneInc => ${tokenOneInc}`);
           if(tokenOneInc % 4 === 0 && tokenOneInc != 0){
-            alert("Yes we have 4 ones!");
+            //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
+            //We are going to loop through the array again and this time find the specific index and assign it a value 0-41
+          
+            
           }
         }
         else if(currentBoard[i][j].getValue() === 2){
           tokenTwoInc++;
-          console.log(`The value of tokenTwoInc => ${tokenTwoInc}`);
           if(tokenTwoInc % 4 === 0 && tokenTwoInc != 0){
-            alert("Yes we have 4 twos!");
+            //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
+           
           }
         }
-        
-
       }
     }
-  }
+}
 
   const playRound = (column) => {
   
