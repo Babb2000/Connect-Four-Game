@@ -337,7 +337,7 @@ function GameController(playerOneName, playerTwoName){
   const fourTokens = () => {
     let tokenOneInc = 0;
     let tokenTwoInc = 0;
-    let indexNumOne = -1;
+    let numericVal1 = 0;
     let indexNumTwo = -1;
     let firstArr = [];
     let secondArr = [];
@@ -359,7 +359,17 @@ function GameController(playerOneName, playerTwoName){
           if(tokenOneInc % 4 === 0 && tokenOneInc != 0){
             //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
             //We are going to loop through the array again and this time find the specific index and assign it a value 0-41
-          
+            
+            for(let k = 0; k < 6; k++){
+              for(let l = 0; l < 7; l++){
+                if(currentBoard[i][j].getValue() === 1){
+                  currentBoard[i][j].numericVal1 = numericVal1;
+                  numericVal1++;
+                }
+              }
+            }
+           
+         
             
           }
         }
