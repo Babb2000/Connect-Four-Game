@@ -7,6 +7,7 @@ let connectFourCounter = -1;
 
 
 
+
 function IntroController(){ //Control's intro gameflow 
 
 
@@ -333,6 +334,39 @@ function GameController(playerOneName, playerTwoName){
     //console.log(`${getActivePlayer().name}'s Turn.`);
   };
 
+  const fourTokens = () => {
+    let tokenOneInc = 0;
+    let tokenTwoInc = 0;
+    console.log("Inside fourTokens");
+    
+    /*This function checks if the current board has 4 of a given token 
+    and each time it does it returns the indices of the current tokens within the main gameboard array*/
+
+
+    let currentBoard = board.getBoard();
+
+    for(let i = 0; i < 6; i++){
+      for(let j = 0; j < 7; j++){
+        //Check if the currentBoard has 4n multiples of 1
+        if(currentBoard[i][j].getValue() === 1){
+          tokenOneInc++;
+          console.log(`The value of tokenOneInc => ${tokenOneInc}`);
+          if(tokenOneInc % 4 === 0 && tokenOneInc != 0){
+            alert("Yes we have 4 ones!");
+          }
+        }
+        else if(currentBoard[i][j].getValue() === 2){
+          tokenTwoInc++;
+          console.log(`The value of tokenTwoInc => ${tokenTwoInc}`);
+          if(tokenTwoInc % 4 === 0 && tokenTwoInc != 0){
+            alert("Yes we have 4 twos!");
+          }
+        }
+        
+
+      }
+    }
+  }
 
   const playRound = (column) => {
   
@@ -420,33 +454,37 @@ function GameController(playerOneName, playerTwoName){
     ]
 
 
-    //Check if player 2 got four in a row 
-    winBoard.forEach((row) =>{
-      row.forEach((column, index) =>{
-        if(column.getValue === 2){
-          twoInc++;
-          if(twoInc % 4 === 0) //Once there is atleast 4 ("2's on the game board")
-          {
-            //Now I am going to step through the array again and this time assign a number to each of the cells that have a token
-            winBoard.forEach((row) =>{
-              row.forEach((column, index) =>{
-                if(column.getValue === 2){
-                  winBoard.forEach((row) =>{
-                    row.forEach((column, index) =>{
-                      connectFourCounter++;
-                      column.dataset.column = connectFourCounter;
-                      playerTwoCombo.push(holder);
-                      console.log(playerTwoCombo);
-                    })
-                  })
+    // //Check if player 2 got four in a row 
+    // winBoard.forEach((row) =>{
+    //   row.forEach((column, index) =>{
+    //     if(column.getValue === 2){
+    //       console.log(column.getValue());
+    //       twoInc++;
+    //       console.log(twoInc);
+    //       if(twoInc % 4 === 0) //Once there is atleast 4 ("2's on the game board")
+    //       {
+            
+    //         //Now I am going to step through the array again and this time assign a number to each of the cells that have a token
+    //         winBoard.forEach((row) =>{
+    //           row.forEach((column, index) =>{
+    //             if(column.getValue === 2){
+    //               console.log("On line 434");
+    //               winBoard.forEach((row) =>{
+    //                 row.forEach((column, index) =>{
+    //                   connectFourCounter++;
+    //                   column.dataset.column = connectFourCounter;
+    //                   playerTwoCombo.push(holder);
+    //                   console.log(playerTwoCombo);
+    //                 })
+    //               })
                  
-                }
-              })
-            })// End of second forEach
-          }
-        }
-      })
-    }) //End of first forEach
+    //             }
+    //           })
+    //         })// End of second forEach
+    //       }
+    //     }
+    //   })
+    // }) //End of first forEach
    
     
   
@@ -455,11 +493,15 @@ function GameController(playerOneName, playerTwoName){
       
     
 
-
+    fourTokens();
     switchPlayerTurn();
     printNewRound();
   
     };
+
+
+
+
   printNewRound();
   
 
