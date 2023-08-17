@@ -372,7 +372,7 @@ function GameController(playerOneName, playerTwoName){
                 }
               })
               if(firstArr.length === 4){
-                winningArrayCombo(firstArr);
+                winningArrayCombo(firstArr, getActivePlayer());
               }
             })
           }
@@ -382,6 +382,25 @@ function GameController(playerOneName, playerTwoName){
           if(tokenTwoInc % 4 === 0 && tokenTwoInc != 0){
             //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
            
+            currentBoard.forEach((row) => {
+              row.forEach((cell, index) => {
+                cell.numericVal1 = numericVal1;
+                numericVal1++;
+                if(cell.getValue() === 2){
+                  secondArr.push(numericVal1);
+                  console.log(`An index of the array holding a winning token => ${numericVal1} `);
+                  console.log(`The array that holds the winning combos => ${firstArr} `);
+                }
+              })
+              if(secondArr.length === 4){
+                winningArrayCombo(secondArr, getActivePlayer());
+              }
+            })
+
+
+
+
+
           }
         }
       }
@@ -389,7 +408,7 @@ function GameController(playerOneName, playerTwoName){
 }
 
 
-  const winningArrayCombo = (checkArr) => {
+  const winningArrayCombo = (checkArr, playerTurn) => {
 
       //Combination of Winning Arrays
       const winningArrays = [
@@ -465,37 +484,70 @@ function GameController(playerOneName, playerTwoName){
       ]
 
       
-      function arraysHaveSameValues(arr1, arr2){
-        if(arr1.length != arr2.length){ //Error Check
-          return false;
-        }
-
-        const sortedArr1 = arr1.slice().sort();
-        const sortedArr2 = arr2.slice().sort();
-
-        for(let i = 0; i < sortedArr1.length; i++){
-          if(sortedArr1[i] != sortedArr2[i]){
+      if(playerTurn.token === 1){
+        function arraysHaveSameValues(arr1, arr2){
+          if(arr1.length != arr2.length){ //Error Check
             return false;
           }
-        }
-
-        return true;
-      }
-
-      let hasSameValues = false;
-
-      for(const array of winningArrays){
-        if(arraysHaveSameValues(checkArr, array)){
-          hasSameValues = true;
-          if(hasSameValues){
-            alert(`Player 1 won the game!!`);
+  
+          const sortedArr1 = arr1.slice().sort();
+          const sortedArr2 = arr2.slice().sort();
+  
+          for(let i = 0; i < sortedArr1.length; i++){
+            if(sortedArr1[i] != sortedArr2[i]){
+              return false;
+            }
           }
-          break;
+  
+          return true;
         }
+  
+        let hasSameValues = false;
+  
+        for(const array of winningArrays){
+          if(arraysHaveSameValues(checkArr, array)){
+            hasSameValues = true;
+            if(hasSameValues){
+              alert(`${playerTurn.name} won the game!!`);
+            }
+            break;
+          }
+        }  
       }
       
-
-
+      if(playerTurn.token === 2){
+        function arraysHaveSameValues(arr1, arr2){
+          if(arr1.length != arr2.length){ //Error Check
+            return false;
+          }
+  
+          const sortedArr1 = arr1.slice().sort();
+          const sortedArr2 = arr2.slice().sort();
+  
+          for(let i = 0; i < sortedArr1.length; i++){
+            if(sortedArr1[i] != sortedArr2[i]){
+              return false;
+            }
+          }
+  
+          return true;
+        }
+  
+        let hasSameValues = false;
+  
+        for(const array of winningArrays){
+          if(arraysHaveSameValues(checkArr, array)){
+            hasSameValues = true;
+            if(hasSameValues){
+              alert(`${playerTurn.name} won the game!!`);
+            }
+            break;
+          }
+        }
+        
+  
+  
+      }
 
 
 
