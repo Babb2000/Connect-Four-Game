@@ -361,18 +361,16 @@ function GameController(playerOneName, playerTwoName){
             //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
             //We are going to loop through the array again and this time find the specific index and assign it a value 0-41
             
-            for(let k = 0; k < 6; k++){
-              for(let l = 0; l < 7; l++){
-                if(currentBoard[i][j].getValue() === 1 && currentBoard[i][j].getValue() != 2 && currentBoard[i][j].getValue() != 0){
-                  currentBoard[i][j].numericVal1 = numericVal1;
-                   winCombo = currentBoard[i][j].numericVal1;
-                  firstArr.push(winCombo);
-                  numericVal1++;
+            currentBoard.forEach((row) => {
+              row.forEach((cell, index) => {
+                cell.numericVal1 = numericVal1;
+                numericVal1++;
+                if(cell.getValue() === 1){
+                  firstArr.push(numericVal1);
+                  console.log(`An index of the array holding a winning token => ${numericVal1} `);
                 }
-                console.log(`The cell number with a winning token => ${winCombo}`);
-
-              }
-            }
+              })
+            })
           }
         }
         else if(currentBoard[i][j].getValue() === 2){
