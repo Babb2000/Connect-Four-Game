@@ -373,6 +373,9 @@ function GameController(playerOneName, playerTwoName){
               })
               if(firstArr.length === 4){
                 winningArrayCombo(firstArr, getActivePlayer());
+                if(!winningArrayCombo(firstArr, getActivePlayer())){
+                  firstArr.length = 0;
+                }
               }
             })
           }
@@ -394,6 +397,9 @@ function GameController(playerOneName, playerTwoName){
               })
               if(secondArr.length === 4){
                 winningArrayCombo(secondArr, getActivePlayer());
+                if(!winningArrayCombo(secondArr, getActivePlayer())){
+                  secondArr.length = 0;
+                }
               }
             })
 
