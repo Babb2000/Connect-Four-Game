@@ -338,10 +338,9 @@ function GameController(playerOneName, playerTwoName){
     let tokenOneInc = 0;
     let tokenTwoInc = 0;
     let numericVal1 = -1;
-    let indexNumTwo = -1;
     let firstArr = [];
     let secondArr = [];
-    let winCombo;
+  
     
 
     console.log("Inside fourTokens");
@@ -373,9 +372,8 @@ function GameController(playerOneName, playerTwoName){
               })
               if(firstArr.length === 4){
                 winningArrayCombo(firstArr, getActivePlayer());
-                if(!winningArrayCombo(firstArr, getActivePlayer())){
-                  firstArr.length = 0;
-                }
+                firstArr = [];
+                numericVal1 = -1;
               }
             })
           }
@@ -397,15 +395,11 @@ function GameController(playerOneName, playerTwoName){
               })
               if(secondArr.length === 4){
                 winningArrayCombo(secondArr, getActivePlayer());
-                if(!winningArrayCombo(secondArr, getActivePlayer())){
-                  secondArr.length = 0;
-                }
+                secondArr = [];
+                numericVal1 = -1;
               }
             })
-
-
-
-
+            
 
           }
         }
@@ -516,7 +510,9 @@ function GameController(playerOneName, playerTwoName){
             if(hasSameValues){
               alert(`${playerTurn.name} won the game!!`);
             }
-            break;
+            else{
+              false;
+            }
           }
         }  
       }
@@ -547,7 +543,9 @@ function GameController(playerOneName, playerTwoName){
             if(hasSameValues){
               alert(`${playerTurn.name} won the game!!`);
             }
-            break;
+            else{
+              false;
+            }
           }
         }
         
