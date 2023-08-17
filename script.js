@@ -464,6 +464,37 @@ function GameController(playerOneName, playerTwoName){
         [13, 20, 27, 34],
       ]
 
+      
+      function arraysHaveSameValues(arr1, arr2){
+        if(arr1.length != arr2.length){ //Error Check
+          return false;
+        }
+
+        const sortedArr1 = arr1.slice().sort();
+        const sortedArr2 = arr2.slice().sort();
+
+        for(let i = 0; i < sortedArr1.length; i++){
+          if(sortedArr1[i] != sortedArr2[i]){
+            return false;
+          }
+        }
+
+        return true;
+      }
+
+      let hasSameValues = false;
+
+      for(const array of winningArrays){
+        if(arraysHaveSameValues(checkArr, array)){
+          hasSameValues = true;
+          if(hasSameValues){
+            alert(`Player 1 won the game!!`);
+          }
+          break;
+        }
+      }
+      
+
 
 
 
