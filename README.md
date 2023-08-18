@@ -31,14 +31,14 @@
 - [ ] *Find a way to include my original algorithm for checking if a player got four in a row.
 
 **Project TakeAways**
-*Seen the direct impact of writing modular code, as it prevented me from repeating a lot of unneccessary code
-*Was able to utilize javascripts different function types: function expressions, and arrow functions
-*Gained extensive practice on manipulating the DOM using javascript 
-*Gained a lot of practice of javascripts different array methods, especially the `.forEach` method, which was useful for working with 2D arrays
-*Utilized factory functions in order to prevent repetitive code that could of occurred if I had used regular objects
-*Used some functions as "controllers" which controlled a sections of the code base, and provided easier debugging
-*Was able to create private members and variables by only returning certain information from factory functions
-*Created my first simple animation using javascript and css, by using javascripts `setTimeOut` and `setInterval` functions
+* Seen the direct impact of writing modular code, as it prevented me from repeating a lot of unneccessary code
+* Was able to utilize javascripts different function types: function expressions, and arrow functions*
+* Gained extensive practice on manipulating the DOM using javascript 
+* Gained a lot of practice of javascripts different array methods, especially the `.forEach` method, which was useful for working with 2D arrays
+* Utilized factory functions in order to prevent repetitive code that could of occurred if I had used regular objects
+* Used some functions as "controllers" which controlled a sections of the code base, and provided easier debugging
+* Was able to create private members and variables by only returning certain information from factory functions
+* Created my first simple animation using javascript and css, by using javascripts `setTimeOut` and `setInterval` functions
 
 
 
