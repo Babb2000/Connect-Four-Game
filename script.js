@@ -335,15 +335,17 @@ function GameController(playerOneName, playerTwoName){
   };
 
   const fourTokens = () => {
+    console.log("Before initialization: ");
     let tokenOneInc = 0;
     let tokenTwoInc = 0;
     let numericVal1 = -1;
+    let numericVal2 = -1;
     let firstArr = [];
     let secondArr = [];
   
     
 
-    console.log("Inside fourTokens");
+    
     
     /*This function checks if the current board has 4 of a given token 
     and each time it does it returns the indices of the current tokens within the main gameboard array*/
@@ -351,52 +353,58 @@ function GameController(playerOneName, playerTwoName){
 
     let currentBoard = board.getBoard();
 
+
+    currentBoard.forEach((row) => {
+      row.forEach((cell, index) => {
+        cell.numericVal1 = numericVal1;
+        numericVal1++;
+      })
+    })
+
+  
     for(let i = 0; i < 6; i++){
       for(let j = 0; j < 7; j++){
         //Check if the currentBoard has 4n multiples of 1
         if(currentBoard[i][j].getValue() === 1){
           tokenOneInc++;
+          console.log(`The value of tokenOneInc => ${tokenOneInc}`);
           if(tokenOneInc % 4 === 0 && tokenOneInc != 0){
             //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
             //We are going to loop through the array again and this time find the specific index and assign it a value 0-41
             
             currentBoard.forEach((row) => {
               row.forEach((cell, index) => {
-                cell.numericVal1 = numericVal1;
-                numericVal1++;
                 if(cell.getValue() === 1){
-                  firstArr.push(numericVal1);
-                  console.log(`An index of the array holding a winning token => ${numericVal1} `);
+                  firstArr.push(cell.numericVal1);
+                  console.log(`An index of the array holding a winning token => ${cell.numericVal1} `);
                   console.log(`The array that holds the winning combos => ${firstArr} `);
                 }
               })
               if(firstArr.length === 4){
                 winningArrayCombo(firstArr, getActivePlayer());
-                firstArr = [];
-                numericVal1 = -1;
+                
               }
             })
+
+            
           }
         }
         else if(currentBoard[i][j].getValue() === 2){
           tokenTwoInc++;
+          console.log(`The value of tokenTwoInc`);
           if(tokenTwoInc % 4 === 0 && tokenTwoInc != 0){
             //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
            
             currentBoard.forEach((row) => {
               row.forEach((cell, index) => {
-                cell.numericVal1 = numericVal1;
-                numericVal1++;
                 if(cell.getValue() === 2){
-                  secondArr.push(numericVal1);
-                  console.log(`An index of the array holding a winning token => ${numericVal1} `);
-                  console.log(`The array that holds the winning combos => ${firstArr} `);
+                  secondArr.push(cell.numericVal1);
+                  console.log(`An index of the array holding a winning token => ${cell.numericVal1} `);
+                  console.log(`The array that holds the winning combos => ${secondArr} `);
                 }
               })
               if(secondArr.length === 4){
                 winningArrayCombo(secondArr, getActivePlayer());
-                secondArr = [];
-                numericVal1 = -1;
               }
             })
             
@@ -486,6 +494,7 @@ function GameController(playerOneName, playerTwoName){
       
       if(playerTurn.token === 1){
         function arraysHaveSameValues(arr1, arr2){
+
           if(arr1.length != arr2.length){ //Error Check
             return false;
           }
