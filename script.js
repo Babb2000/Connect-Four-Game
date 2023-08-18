@@ -335,241 +335,116 @@ function GameController(playerOneName, playerTwoName){
   };
 
   const fourTokens = () => {
-    console.log("Before initialization: ");
-    let tokenOneInc = 0;
-    let tokenTwoInc = 0;
-    let numericVal1 = -1;
-    let numericVal2 = -1;
-    let firstArr = [];
-    let secondArr = [];
-  
-    
+   
+    const winningArrays = [
+      [0, 1, 2, 3],
+      [41, 40, 39, 38],
+      [7, 8, 9, 10],
+      [34, 33, 32, 31],
+      [14, 15, 16, 17],
+      [27, 26, 25, 24],
+      [21, 22, 23, 24],
+      [20, 19, 18, 17],
+      [28, 29, 30, 31],
+      [13, 12, 11, 10],
+      [35, 36, 37, 38],
+      [6, 5, 4, 3],
+      [0, 7, 14, 21],
+      [41, 34, 27, 20],
+      [1, 8, 15, 22],
+      [40, 33, 26, 19],
+      [2, 9, 16, 23],
+      [39, 32, 25, 18],
+      [3, 10, 17, 24],
+      [38, 31, 24, 17],
+      [4, 11, 18, 25],
+      [37, 30, 23, 16],
+      [5, 12, 19, 26],
+      [36, 29, 22, 15],
+      [6, 13, 20, 27],
+      [35, 28, 21, 14],
+      [0, 8, 16, 24],
+      [41, 33, 25, 17],
+      [7, 15, 23, 31],
+      [34, 26, 18, 10],
+      [14, 22, 30, 38],
+      [27, 19, 11, 3],
+      [35, 29, 23, 17],
+      [6, 12, 18, 24],
+      [28, 22, 16, 10],
+      [13, 19, 25, 31],
+      [21, 15, 9, 3],
+      [20, 26, 32, 38],
+      [36, 30, 24, 18],
+      [5, 11, 17, 23],
+      [37, 31, 25, 19],
+      [4, 10, 16, 22],
+      [2, 10, 18, 26],
+      [39, 31, 23, 15],
+      [1, 9, 17, 25],
+      [40, 32, 24, 16],
+      [9, 17, 25, 33],
+      [8, 16, 24, 32],
+      [11, 17, 23, 29],
+      [12, 18, 24, 30],
+      [1, 2, 3, 4],
+      [5, 4, 3, 2],
+      [8, 9, 10, 11],
+      [12, 11, 10, 9],
+      [15, 16, 17, 18],
+      [19, 18, 17, 16],
+      [22, 23, 24, 25],
+      [26, 25, 24, 23],
+      [29, 30, 31, 32],
+      [33, 32, 31, 30],
+      [36, 37, 38, 39],
+      [40, 39, 38, 37],
+      [7, 14, 21, 28],
+      [8, 15, 22, 29],
+      [9, 16, 23, 30],
+      [10, 17, 24, 31],
+      [11, 18, 25, 32],
+      [12, 19, 26, 33],
+      [13, 20, 27, 34],
+    ]
 
-    
-    
-    /*This function checks if the current board has 4 of a given token 
-    and each time it does it returns the indices of the current tokens within the main gameboard array*/
+
+   const currentPlayer = getActivePlayer();
+   const gameBoard = board.getBoard();
+
+   function checkforWin(board, player){
+
+    for(const winArray of winningArrays){
+      const [a,b,c,d] = winArray;
+      const cellA = board[Math.floor(a / 7)][a % 7].getValue();
+      const cellB = board[Math.floor(b / 7)][b % 7].getValue();
+      const cellC = board[Math.floor(c / 7)][c % 7].getValue();
+      const cellD = board[Math.floor(d / 7)][d % 7].getValue();
 
 
-    let currentBoard = board.getBoard();
-
-
-    currentBoard.forEach((row) => {
-      row.forEach((cell, index) => {
-        cell.numericVal1 = numericVal1;
-        numericVal1++;
-      })
-    })
-
-  
-    for(let i = 0; i < 6; i++){
-      for(let j = 0; j < 7; j++){
-        //Check if the currentBoard has 4n multiples of 1
-        if(currentBoard[i][j].getValue() === 1){
-          tokenOneInc++;
-          console.log(`The value of tokenOneInc => ${tokenOneInc}`);
-          if(tokenOneInc % 4 === 0 && tokenOneInc != 0){
-            //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
-            //We are going to loop through the array again and this time find the specific index and assign it a value 0-41
-            
-            currentBoard.forEach((row) => {
-              row.forEach((cell, index) => {
-                if(cell.getValue() === 1){
-                  firstArr.push(cell.numericVal1);
-                  console.log(`An index of the array holding a winning token => ${cell.numericVal1} `);
-                  console.log(`The array that holds the winning combos => ${firstArr} `);
-                }
-              })
-              if(firstArr.length === 4){
-                winningArrayCombo(firstArr, getActivePlayer());
-                
-              }
-            })
-
-            
-          }
-        }
-        else if(currentBoard[i][j].getValue() === 2){
-          tokenTwoInc++;
-          console.log(`The value of tokenTwoInc`);
-          if(tokenTwoInc % 4 === 0 && tokenTwoInc != 0){
-            //Now that we have four ones on the board we need to find the array indices which hold these four ones and find away to retrieve the index
-           
-            currentBoard.forEach((row) => {
-              row.forEach((cell, index) => {
-                if(cell.getValue() === 2){
-                  secondArr.push(cell.numericVal1);
-                  console.log(`An index of the array holding a winning token => ${cell.numericVal1} `);
-                  console.log(`The array that holds the winning combos => ${secondArr} `);
-                }
-              })
-              if(secondArr.length === 4){
-                winningArrayCombo(secondArr, getActivePlayer());
-              }
-            })
-            
-
-          }
-        }
+      if(
+        cellA === player.token &&
+        cellB === player.token &&
+        cellC === player.token &&
+        cellD === player.token
+      ){
+        alert(`${player.name} is the winner!!!`);
+        return true;
       }
     }
+
+      return false;
+  }
+
+  checkforWin(gameBoard, currentPlayer);
+
 }
 
-
-  const winningArrayCombo = (checkArr, playerTurn) => {
-
-      //Combination of Winning Arrays
-      const winningArrays = [
-        [0, 1, 2, 3],
-        [41, 40, 39, 38],
-        [7, 8, 9, 10],
-        [34, 33, 32, 31],
-        [14, 15, 16, 17],
-        [27, 26, 25, 24],
-        [21, 22, 23, 24],
-        [20, 19, 18, 17],
-        [28, 29, 30, 31],
-        [13, 12, 11, 10],
-        [35, 36, 37, 38],
-        [6, 5, 4, 3],
-        [0, 7, 14, 21],
-        [41, 34, 27, 20],
-        [1, 8, 15, 22],
-        [40, 33, 26, 19],
-        [2, 9, 16, 23],
-        [39, 32, 25, 18],
-        [3, 10, 17, 24],
-        [38, 31, 24, 17],
-        [4, 11, 18, 25],
-        [37, 30, 23, 16],
-        [5, 12, 19, 26],
-        [36, 29, 22, 15],
-        [6, 13, 20, 27],
-        [35, 28, 21, 14],
-        [0, 8, 16, 24],
-        [41, 33, 25, 17],
-        [7, 15, 23, 31],
-        [34, 26, 18, 10],
-        [14, 22, 30, 38],
-        [27, 19, 11, 3],
-        [35, 29, 23, 17],
-        [6, 12, 18, 24],
-        [28, 22, 16, 10],
-        [13, 19, 25, 31],
-        [21, 15, 9, 3],
-        [20, 26, 32, 38],
-        [36, 30, 24, 18],
-        [5, 11, 17, 23],
-        [37, 31, 25, 19],
-        [4, 10, 16, 22],
-        [2, 10, 18, 26],
-        [39, 31, 23, 15],
-        [1, 9, 17, 25],
-        [40, 32, 24, 16],
-        [9, 17, 25, 33],
-        [8, 16, 24, 32],
-        [11, 17, 23, 29],
-        [12, 18, 24, 30],
-        [1, 2, 3, 4],
-        [5, 4, 3, 2],
-        [8, 9, 10, 11],
-        [12, 11, 10, 9],
-        [15, 16, 17, 18],
-        [19, 18, 17, 16],
-        [22, 23, 24, 25],
-        [26, 25, 24, 23],
-        [29, 30, 31, 32],
-        [33, 32, 31, 30],
-        [36, 37, 38, 39],
-        [40, 39, 38, 37],
-        [7, 14, 21, 28],
-        [8, 15, 22, 29],
-        [9, 16, 23, 30],
-        [10, 17, 24, 31],
-        [11, 18, 25, 32],
-        [12, 19, 26, 33],
-        [13, 20, 27, 34],
-      ]
-
-      
-      if(playerTurn.token === 1){
-        function arraysHaveSameValues(arr1, arr2){
-
-          if(arr1.length != arr2.length){ //Error Check
-            return false;
-          }
   
-          const sortedArr1 = arr1.slice().sort();
-          const sortedArr2 = arr2.slice().sort();
-  
-          for(let i = 0; i < sortedArr1.length; i++){
-            if(sortedArr1[i] != sortedArr2[i]){
-              return false;
-            }
-          }
-  
-          return true;
-        }
-  
-        let hasSameValues = false;
-  
-        for(const array of winningArrays){
-          if(arraysHaveSameValues(checkArr, array)){
-            hasSameValues = true;
-            if(hasSameValues){
-              alert(`${playerTurn.name} won the game!!`);
-            }
-            else{
-              false;
-            }
-          }
-        }  
-      }
-      
-      if(playerTurn.token === 2){
-        function arraysHaveSameValues(arr1, arr2){
-          if(arr1.length != arr2.length){ //Error Check
-            return false;
-          }
-  
-          const sortedArr1 = arr1.slice().sort();
-          const sortedArr2 = arr2.slice().sort();
-  
-          for(let i = 0; i < sortedArr1.length; i++){
-            if(sortedArr1[i] != sortedArr2[i]){
-              return false;
-            }
-          }
-  
-          return true;
-        }
-  
-        let hasSameValues = false;
-  
-        for(const array of winningArrays){
-          if(arraysHaveSameValues(checkArr, array)){
-            hasSameValues = true;
-            if(hasSameValues){
-              alert(`${playerTurn.name} won the game!!`);
-            }
-            else{
-              false;
-            }
-          }
-        }
-        
-  
-  
-      }
-
-
-
-
-
-  }
 
   const playRound = (column) => {
   
+    
     
     board.dropToken(column, getActivePlayer().token);
     
@@ -577,26 +452,20 @@ function GameController(playerOneName, playerTwoName){
     /*  This is where we would check for a winner and handle that logic,
         such as a win message. */
 
-    const winBoard = board.getBoard();
-    const playerTwoCombo = [];
+   
     
-  
-
-
+    
   
       
     
       
     
-
+    
     fourTokens();
     switchPlayerTurn();
     printNewRound();
   
-    };
-
-
-
+  };
 
   printNewRound();
   
@@ -606,7 +475,9 @@ function GameController(playerOneName, playerTwoName){
     getActivePlayer,
     getBoard: board.getBoard
   };
+
 }
+
 
 
 function ScreenController() { 
