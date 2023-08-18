@@ -18,10 +18,10 @@
 
 
 ## What I plan on adding to this project
-- [ ] *Create win conditions for the console and DOM versions*
-- [ ] *Create intro screen where players can enter their name*
-- [ ] *Create a winner screen and play again function*
-- [ ] *Add styling/utilize CSS Grid capabilities to display board game*
+- [X] *Create win conditions for the console and DOM versions*
+- [X] *Create intro screen where players can enter their name*
+- [X] *Create a winner screen
+- [X] *Add styling/utilize CSS Grid capabilities to display board game*
 <br>
 
 
