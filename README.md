@@ -24,11 +24,13 @@
 - [X] *Add styling/utilize CSS Grid capabilities to display board game*
 <br>
 
-## Might come back to add:
-- [ ] *Functionality that makes the winning cell indexes dissapear when a player has won
-- [ ] *Create a screen to ask the user if he/she wants to play again
-- [ ] *Refactor code, and optimize
-- [ ] *Find a way to include my original algorithm for checking if a player got four in a row.
+## Coming back to add:
+- [ ] *Game Over/ Play Again Screen*
+- [ ] *Light up cells function*
+- [ ] *Functionality that makes the winning cell indexes dissapear when a player has won*
+- [ ] *Create a screen to ask the user if he/she wants to play again*
+- [ ] *Refactor code, and optimize*
+- [ ] *Find a way to include my original algorithm for checking if a player got four in a row.*
 
 **Project TakeAways**
 * Seen the direct impact of writing modular code, as it prevented me from repeating a lot of unneccessary code
@@ -45,6 +47,8 @@
 
 
 [Link to Code on Replit](https://replit.com/@40percentzinc/ConnectFourWithDOMSkeleton)
+
+**Check it Out** :point_right: [Connect Four](https://babb2000.github.io/Connect-Four-Game/);
 
 
 

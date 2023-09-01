@@ -321,7 +321,7 @@ function GameController(playerOneName, playerTwoName){
 
 
   let activePlayer = players[0];
-  console.log(activePlayer.name);
+  
 
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -331,7 +331,7 @@ function GameController(playerOneName, playerTwoName){
 
   const printNewRound = () => {
     board.printBoard();
-    //console.log(`${getActivePlayer().name}'s Turn.`);
+    
   };
 
   const fourTokens = () => {
@@ -501,7 +501,7 @@ function ScreenController() {
     const activePlayer = game.getActivePlayer();
   
     // Display player's turn
-    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
+    playerTurnDiv.textContent = `${activePlayer.name}'s`;
 
 
     // Render board squares
