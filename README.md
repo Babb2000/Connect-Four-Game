@@ -1,3 +1,5 @@
+**Check it Out** :point_right: [Connect Four](https://babb2000.github.io/Connect-Four-Game/)
+
 # Connect-Four-Game / Inspired by [Alex Younger](https://github.com/fortypercenttitanium)
 
 ![Image of Blog Post](Images/Connect_FourGame.png)
@@ -48,7 +50,6 @@
 
 [Link to Code on Replit](https://replit.com/@40percentzinc/ConnectFourWithDOMSkeleton)
 
-**Check it Out** :point_right: [Connect Four](https://babb2000.github.io/Connect-Four-Game/)
 
 
 
