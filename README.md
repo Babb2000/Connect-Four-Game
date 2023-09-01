@@ -48,7 +48,7 @@
 
 [Link to Code on Replit](https://replit.com/@40percentzinc/ConnectFourWithDOMSkeleton)
 
-**Check it Out** :point_right: [Connect Four](https://babb2000.github.io/Connect-Four-Game/);
+**Check it Out** :point_right: [Connect Four](https://babb2000.github.io/Connect-Four-Game/)
 
 
 
