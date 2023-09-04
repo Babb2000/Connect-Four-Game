@@ -14,7 +14,6 @@
 * Worked with arrow functions
 * Used Ternary Statements `case ? case1 : case2`
 * Utilized encapsulation techniques through closure
-* Avoided global code
 * Seen the benefits of callback functions
 <br>
 
